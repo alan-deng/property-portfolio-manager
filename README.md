@@ -1,9 +1,13 @@
-Name
+#Property Portfolio Manager
 ==========================
-Property Portfolio Manager
-
-Authors and acknowledgement
+##Technologies Used
+===========================
+####HTML, JS, Node.js, Express, Bootstrap, Mongo, Mongoose?, XYZ API
+##Description
 ==========================
-github.com/alan-deng
-github.com/isabellukk
-
+###This is an app that allows property owners to organize and manage their properties.
+##Authors and acknowledgement
+==========================
+###github.com/alan-deng
+###github.com/isabellukk
+###github.com/style6513
