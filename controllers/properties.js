@@ -1,7 +1,4 @@
 const express = require("express");
-const {
-  route,
-} = require("../../../2_unit/lessons/fruits/controllers/fruit.js");
 const Property = require("../models/properties.js");
 const router = express.Router();
 
@@ -18,6 +15,16 @@ router.get("/", (req, res) => {
   });
 });
 
+//New
+router.get("/new", (req, res) => {
+  if (err) {
+    res.send(res.send("error 404"));
+  } else {
+    res.render("./properties/new.ejs");
+  }
+});
+
+
 //Show
 router.get("/:idx", (req, res) => {
   Property.find({ _id: req.params.idx }, (err, property) => {
@@ -31,14 +38,7 @@ router.get("/:idx", (req, res) => {
   });
 });
 
-//New
-router.get("/new", (req, res) => {
-  if (err) {
-    res.send(res.send("error 404"));
-  } else {
-    res.render("./properties/new.ejs");
-  }
-});
+
 
 //New POST
 router.post("/", (req, res) => {
