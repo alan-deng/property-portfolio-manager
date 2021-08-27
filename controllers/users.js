@@ -63,13 +63,6 @@ usersRouter.delete("/:idx", (req, res) => {
   });
 });
 
-usersRouter.use(
-  "/:userId/properties",
-  (req, res, next) => {
-    req.userId = req.params.userId;
-    next();
-  },
-  propertiesRouter
-);
+usersRouter.use("/:userId/properties", propertiesRouter);
 
 module.exports = usersRouter;
