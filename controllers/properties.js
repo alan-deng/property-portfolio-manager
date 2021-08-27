@@ -100,13 +100,6 @@ propertiesRouter.delete("/:idx", (req, res) => {
   });
 });
 
-propertiesRouter.use(
-  "/:propertyId/tenants",
-  (req, res, next) => {
-    req.propertyId = req.params.propertyId;
-    next();
-  },
-  tenantsRouter
-);
+propertiesRouter.use("/:propertyId/tenants", tenantsRouter);
 
 module.exports = propertiesRouter;

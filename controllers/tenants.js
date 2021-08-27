@@ -1,6 +1,6 @@
 const Property = require("../models/properties");
 const Tenant = require("../models/tenants");
-const tenantsRouter = require('express').Router();
+const tenantsRouter = require('express').Router({ mergeParams: true });
 
 // URL is /users/:userId/properties/:propertyId/tenants
 // all routes are for a specific property
