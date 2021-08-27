@@ -1,1 +1,18 @@
-<h1>Tenants Edit</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+      <h1>EDIT Tenants Page</h1>
+      <form action="/tenants/<%=id%>?_method=PUT" method="POST">
+        name: <input type="text" name="name"></br>
+        rent: <input type="number" name="rent"></br>
+        contact number: <input type="tel" name="contactNum" >
+        contact email: <input type="email" name="contactEmail">
+        property Rented: <input type="text" name="propertyRented">
+        <input type="submit" value="Edit Tenant">
+      </form>
+    </body>
+</html>
