@@ -1,8 +1,6 @@
-const usersRouter = require("express").Router();
 const User = require("../models/users");
+const usersRouter = require("express").Router();
 const propertiesRouter = require("./properties");
-
-// console.log(propertiesRouter)
 
 // Index
 // ... There shouldn't be an index for all users.

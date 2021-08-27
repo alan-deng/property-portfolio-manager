@@ -1,7 +1,6 @@
-const express = require("express");
 const Property = require("../models/properties");
 const User = require("../models/users");
-const propertiesRouter = express.Router();
+const propertiesRouter = require('express').Router();
 const tenantsRouter = require("./tenants");
 
 // URL is /users/:userId/properties
@@ -80,7 +79,7 @@ propertiesRouter.put("/:idx", (req, res) => {
     if (err) {
       res.send("error updating property");
     } else {
-      res.redirect(`/${req.params.idx}`);
+      res.redirect(`/users/${req.userId}/properties/${req.params.idx}`);
     }
   });
 });
@@ -91,7 +90,12 @@ propertiesRouter.delete("/:idx", (req, res) => {
     if (err) {
       res.send("error deleting property");
     } else {
-      res.redirect("/");
+      User.findByIdAndUpdate(req.userId, {$pull: req.params.idx}, err => {
+        if(err){
+          res.send('error removing property from user')
+        }
+      })
+      res.redirect(`/users/${req.userId}/properties`);
     }
   });
 });
