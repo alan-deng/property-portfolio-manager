@@ -49,7 +49,7 @@ tenantsRouter.get('/:id/edit', (req,res)=>{
 })
 
 // Update
-tenantsRouter.put('/id', (req,res)=>{
+tenantsRouter.put('/:id', (req,res)=>{
   Tenant.findByIdAndUpdate(req.params.id, req.body, {new: true})
   res.redirect('/${req.params.id}')
 })
@@ -65,7 +65,6 @@ tenantsRouter.delete('/:id', (req,res)=>{
   })
 })
 
-// tenantsRouter.use('/:')
 
 
 module.exports = tenantsRouter
