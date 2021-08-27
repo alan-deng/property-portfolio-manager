@@ -7,10 +7,10 @@
   <body>
     <h1>Tenants Index Page</h1>
     <ul>
-      <% for (let i = 0; i < tenants.length; i++) { %>
+      <% for (let i = 0; i < tenant.length; i++) { %>
       <li>
         <a href="/tenants/<%=i%>">
-          <%=tenants[i].name%>
+          <%=tenant[i].name%>
         </a>
         <form action="/tenants/<%=i%>?_method=DELETE" method="POST">
           <input type='submit' value="DELETE"/>
