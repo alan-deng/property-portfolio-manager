@@ -1,33 +1,35 @@
 const express = require("express");
-const Property = require("../models/properties.js");
-const router = express.Router();
+const Property = require("../models/properties");
+const User = require("../models/users");
+const propertiesRouter = express.Router();
+const tenantsRouter = require("./tenants");
+
+//route is /users/:userId/properties
 
 //Index
-router.get("/", (req, res) => {
-  Property.find({}, (err, allProperties) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.render("./properties/index.ejs", {
-        allProperties: allProperties,
-      });
-    }
-  });
+propertiesRouter.get("/", (req, res) => {
+  User.findById(req.userId)
+    .populate("ownedProperties")
+    .exec((err, user) => {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log(user);
+        res.render("./properties/index.ejs", {
+          userProperties: user.ownedProperties,
+        });
+      }
+    });
 });
 
 //New
-router.get("/new", (req, res) => {
-  if (err) {
-    res.send(res.send("error 404"));
-  } else {
-    res.render("./properties/new.ejs");
-  }
+propertiesRouter.get("/new", (req, res) => {
+  res.render("./properties/new.ejs");
 });
 
-
 //Show
-router.get("/:idx", (req, res) => {
-  Property.find({ _id: req.params.idx }, (err, property) => {
+propertiesRouter.get("/:idx", (req, res) => {
+  Property.findById(req.params.idx, (err, property) => {
     if (err) {
       res.send("error 404 property not found");
     } else {
@@ -38,11 +40,10 @@ router.get("/:idx", (req, res) => {
   });
 });
 
-
 //New POST
-router.post("/", (req, res) => {
+propertiesRouter.post("/", (req, res) => {
   if (err) {
-    res.send(res.send("error 404"));
+    res.send("error creating property");
   } else {
     Property.create(req.body);
     res.redirect("/");
@@ -50,10 +51,10 @@ router.post("/", (req, res) => {
 });
 
 //Edit Page
-router.get("/:idx/edit", (req, res) => {
-  Property.find({ _id: req.params.idx }, (err, property) => {
+propertiesRouter.get("/:idx/edit", (req, res) => {
+  Property.findById(req.params.idx, (err, property) => {
     if (err) {
-      res.send(res.send("error 404"));
+      res.send("error 404 user not found");
     } else {
       res.render("./properties/edit.ejs", {
         property: property,
@@ -63,20 +64,34 @@ router.get("/:idx/edit", (req, res) => {
 });
 
 //Update
-router.put("/:idx", (req, res) => {
-  Property.findByIdAndUpdate(req.params.idx, req.body, { new: true });
-  res.redirect(`/${req.params.idx}`);
+propertiesRouter.put("/:idx", (req, res) => {
+  Property.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
+    if (err) {
+      res.send("error updating property");
+    } else {
+      res.redirect(`/${req.params.idx}`);
+    }
+  });
 });
 
 //Delete Route
-router.delete("/:idx", (req, res) => {
-  Property.findByIdAndDelete(req.params.idx, (err, deletedProperty) => {
+propertiesRouter.delete("/:idx", (req, res) => {
+  Property.findByIdAndDelete(req.params.idx, (err) => {
     if (err) {
-      res.send(res.send("error 404"));
+      res.send("error deleting property");
     } else {
       res.redirect("/");
     }
   });
 });
 
-module.exports = router;
+propertiesRouter.use(
+  "/:propertyId/tenants",
+  (req, res, next) => {
+    req.propertyId = req.params.propertyId;
+    next();
+  },
+  tenantsRouter
+);
+
+module.exports = propertiesRouter;
