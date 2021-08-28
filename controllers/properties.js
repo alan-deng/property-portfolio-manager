@@ -1,6 +1,6 @@
 const Property = require("../models/properties");
 const User = require("../models/users");
-const propertiesRouter = require('express').Router({ mergeParams: true });
+const propertiesRouter = require("express").Router({ mergeParams: true });
 const tenantsRouter = require("./tenants");
 
 // URL is /users/:userId/properties
@@ -18,7 +18,7 @@ propertiesRouter.get("/", (req, res) => {
         // console.log(user);
         res.render("./properties/index.ejs", {
           userProperties: user.ownedProperties,
-          userId: req.params.userId
+          userId: req.params.userId,
         });
       }
     });
@@ -26,7 +26,9 @@ propertiesRouter.get("/", (req, res) => {
 
 //New
 propertiesRouter.get("/new", (req, res) => {
-  res.render("./properties/new.ejs");
+  res.render("./properties/new.ejs", {
+    userId: req.params.userId,
+  });
 });
 
 //Show (needs properties index view to link to '/users/:userId/properties/:idx)
@@ -37,7 +39,7 @@ propertiesRouter.get("/:idx", (req, res) => {
     } else {
       res.render("./properties/show.ejs", {
         property: property,
-        userId: req.params.userId
+        userId: req.params.userId,
       });
     }
   });
@@ -45,20 +47,24 @@ propertiesRouter.get("/:idx", (req, res) => {
 
 //New POST
 propertiesRouter.post("/", (req, res) => {
-    Property.create(req.body, (err, property) => {
-      if(err){
-        res.send('error creating property');
-      } else {
-          User.findByIdAndUpdate(req.params.userId, {$push: {ownedProperties: property._id}}, err => {
-            if(err){
-              res.send('error adding property to list of properties')
-            } else {
-              res.redirect(`/users/${req.params.userId}/properties`);
-            }
-          })
-      }
-    })
+  Property.create(req.body, (err, property) => {
+    if (err) {
+      res.send("error creating property");
+    } else {
+      User.findByIdAndUpdate(
+        req.params.userId,
+        { $push: { ownedProperties: property._id } },
+        (err) => {
+          if (err) {
+            res.send("error adding property to list of properties");
+          } else {
+            res.redirect(`/users/${req.params.userId}/properties`);
+          }
+        }
+      );
+    }
   });
+});
 
 //Edit Page
 propertiesRouter.get("/:idx/edit", (req, res) => {
@@ -68,6 +74,7 @@ propertiesRouter.get("/:idx/edit", (req, res) => {
     } else {
       res.render("./properties/edit.ejs", {
         property: property,
+        userId: req.params.userId,
       });
     }
   });
@@ -90,11 +97,15 @@ propertiesRouter.delete("/:idx", (req, res) => {
     if (err) {
       res.send("error deleting property");
     } else {
-      User.findByIdAndUpdate(req.params.userId, {$pull: req.params.idx}, err => {
-        if(err){
-          res.send('error removing property from user')
+      User.findByIdAndUpdate(
+        req.params.userId,
+        { $pull: req.params.idx },
+        (err) => {
+          if (err) {
+            res.send("error removing property from user");
+          }
         }
-      })
+      );
       res.redirect(`/users/${req.params.userId}/properties`);
     }
   });

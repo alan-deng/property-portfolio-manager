@@ -1,1 +1,48 @@
-<h1>Properties New Page</h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>New Views Property</title>
+</head>
+
+<body>
+  <h1> Add New Property</h1>
+
+  <form action="/users/<%=userId%>/properties" method="POST">
+
+    Name: <input id="name" type="text" name="name"  />
+    <br />
+
+    Buy Price: $<input id="buyPrice" type="number" name="buyPrice" />
+    <br />
+
+    Address: <input id="address" type="text" name="address" />
+    <br />
+
+    Yearly Property Tax: $<input id="fees.propertyTax" type="number" name="fees.propertyTax"/>
+    <br />
+
+    Yearly HOA Fees: $<input id="fees.hoaFees" type="number" name="fees.hoaFees" />
+    <br />
+
+    Yearly Home Insurance Cost: $<input id="fees.homeInsurance_cost" type="number" name="fees.homeInsurance_cost"/>
+    <br />
+
+    Yearly Renters Insurance Cost: $<input id="fees.hoaFees" type="number" name="fees.renterInsuranceCost"/>
+    <br />
+
+    <label for="img">Add Image URL</label>
+    <input type="text" name="img" id="img"/>
+
+
+    <input type="submit" name="" value="Create Property"/>
+
+    </form>
+
+
+
+
+</body>
+
+</html>
