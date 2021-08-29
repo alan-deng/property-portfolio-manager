@@ -2,6 +2,7 @@ const Property = require("../models/properties");
 const User = require("../models/users");
 const propertiesRouter = require("express").Router({ mergeParams: true });
 const tenantsRouter = require("./tenants");
+const axios = require('axios').default;
 
 // URL is /users/:userId/properties
 // all routes are for a specific user
@@ -44,9 +45,18 @@ propertiesRouter.get("/:idx", (req, res) => {
     }
   });
 });
-
 //New POST
 propertiesRouter.post("/", (req, res) => {
+
+//Maps API Code
+  // let propertyCoords;
+  // let encodedAddress;
+  // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyB_YsGtKFDmwGsHu8hRFj-Q-n8WmYW2Ko0`)
+  //   .then(response => {console.log(response.data.results[0].geometry);  propertyCoords = response.data.results[0].geometry })
+  //   .then(() => console.log(shit.location))
+
+  
+  
   Property.create(req.body, (err, property) => {
     if (err) {
       res.send("error creating property");

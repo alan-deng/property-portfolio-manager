@@ -4,6 +4,8 @@
   "description": "==========================\r ##Technologies Used\r ===========================\r ####HTML, JS, Node.js, Express, Bootstrap, Mongo, Mongoose?, XYZ API\r ##Description\r ==========================\r ###This is an app that allows property owners to organize and manage their properties.\r ##Authors and acknowledgement\r ==========================\r ###github.com/alan-deng\r ###github.com/isabellukk\r ###github.com/style6513",
   "main": "server.js",
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.12.2",
+    "axios": "^0.21.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "method-override": "^3.0.0",
