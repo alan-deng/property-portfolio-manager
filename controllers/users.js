@@ -7,7 +7,9 @@ const propertiesRouter = require("./properties");
 
 //New
 usersRouter.get("/new", (req, res) => {
-  res.render("./users/new.ejs");
+  res.render("./users/new.ejs", {
+    userId: req.body.params,
+  });
 });
 
 //Show
@@ -25,12 +27,14 @@ usersRouter.get("/:idx", (req, res) => {
 
 //New POST
 usersRouter.post("/", (req, res) => {
-  if (err) {
-    res.send("error creating user");
-  } else {
-    User.create(req.body);
-    res.redirect("/");
-  }
+  User.create(req.body, (err, createdUser) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.redirect(`${createdUser._id}/properties`);
+    }
+  });
 });
 
 //Edit Page
@@ -41,6 +45,7 @@ usersRouter.get("/:idx/edit", (req, res) => {
     } else {
       res.render("./users/edit.ejs", {
         user: user,
+        userId: req.params.idx,
       });
     }
   });
@@ -48,8 +53,17 @@ usersRouter.get("/:idx/edit", (req, res) => {
 
 //Update
 usersRouter.put("/:idx", (req, res) => {
-  User.findByIdAndUpdate(req.params.idx, req.body, { new: true });
-  res.redirect(`/${req.params.idx}`);
+  if (req.body.password === req.body.password1) {
+    User.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
+      if (err) {
+        res.send("error updating user information");
+      } else {
+        res.redirect(`/users/${req.params.idx}/properties`);
+      }
+    });
+  } else {
+    res.send("error, passwords do not match");
+  }
 });
 
 //Delete Route
