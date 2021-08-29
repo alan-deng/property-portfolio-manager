@@ -32,7 +32,7 @@ usersRouter.post("/", (req, res) => {
       console.log(err);
       res.send(err);
     } else {
-      res.redirect(`${createdUser._id}/properties`);
+      res.redirect(`/users/${createdUser._id}/properties`);
     }
   });
 });
