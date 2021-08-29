@@ -2,7 +2,7 @@ const Property = require("../models/properties");
 const User = require("../models/users");
 const propertiesRouter = require("express").Router({ mergeParams: true });
 const tenantsRouter = require("./tenants");
-const axios = require('axios').default;
+const axios = require("axios").default;
 
 // URL is /users/:userId/properties
 // all routes are for a specific user
@@ -47,32 +47,39 @@ propertiesRouter.get("/:idx", (req, res) => {
 });
 //New POST
 propertiesRouter.post("/", (req, res) => {
-
-//Maps API Code
-  // let propertyCoords;
-  // let encodedAddress;
-  // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyB_YsGtKFDmwGsHu8hRFj-Q-n8WmYW2Ko0`)
-  //   .then(response => {console.log(response.data.results[0].geometry);  propertyCoords = response.data.results[0].geometry })
-  //   .then(() => console.log(shit.location))
-
-  
-  
-  Property.create(req.body, (err, property) => {
-    if (err) {
-      res.send("error creating property");
-    } else {
-      User.findByIdAndUpdate(
-        req.params.userId,
-        { $push: { ownedProperties: property._id } },
-        (err) => {
-          if (err) {
-            res.send("error adding property to list of properties");
-          } else {
-            res.redirect(`/users/${req.params.userId}/properties`);
-          }
-        }
-      );
+  //req.body parsing into User Schema format
+  let fees = {};
+  for (const key in req.body) {
+    if (key.includes("fees.")) {
+      fees[key.slice(5)] = req.body[key];
     }
+  }
+  req.body.fees = fees;
+  let encodedAddress =
+    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+    encodeURIComponent(req.body.address) +
+    `&key=${process.env.APIKEY}`;
+  //Maps API Code
+  axios.get(encodedAddress).then((response) => {
+    let propertyCoords = response.data.results[0].geometry.location;
+    req.body.location = propertyCoords;
+    Property.create(req.body, (err, property) => {
+      if (err) {
+        res.send("error creating property");
+      } else {
+        User.findByIdAndUpdate(
+          req.params.userId,
+          { $push: { ownedProperties: property._id } },
+          (err) => {
+            if (err) {
+              res.send("error adding property to list of properties");
+            } else {
+              res.redirect(`/users/${req.params.userId}/properties`);
+            }
+          }
+        );
+      }
+    });
   });
 });
 
