@@ -2,7 +2,7 @@ const Property = require("../models/properties");
 const User = require("../models/users");
 const propertiesRouter = require("express").Router({ mergeParams: true });
 const tenantsRouter = require("./tenants");
-const axios = require("axios").default;
+const calculations = require("../public/calculations");
 
 // URL is /users/:userId/properties
 // all routes are for a specific user
@@ -47,22 +47,9 @@ propertiesRouter.get("/:idx", (req, res) => {
 });
 //New POST
 propertiesRouter.post("/", (req, res) => {
-  //req.body parsing into User Schema format
-  let fees = {};
-  for (const key in req.body) {
-    if (key.includes("fees.")) {
-      fees[key.slice(5)] = req.body[key];
-    }
-  }
-  req.body.fees = fees;
-  let encodedAddress =
-    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-    encodeURIComponent(req.body.address) +
-    `&key=${process.env.APIKEY}`;
-  //Maps API Code
-  axios.get(encodedAddress).then((response) => {
-    let propertyCoords = response.data.results[0].geometry.location;
-    req.body.location = propertyCoords;
+  // calculations is imported from the public/calculations file
+  calculations.feeParser(req);
+  calculations.MapsAPICall(req).then(() => {
     Property.create(req.body, (err, property) => {
       if (err) {
         res.send("error creating property");

@@ -1,36 +1,23 @@
-// API Call to google geocoder
-const geocoderGET = () => {
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-        .then(response => response.json())
-        .then(json => console.log(json))
-}
+const axios = require("axios").default;
+require("dotenv").config();
 
-
-// module.exports = {
-//     geocoderGET: () => {
-//         fetch('https://jsonplaceholder.typicode.com/todos/1')
-//             .then(response => response.json())
-//             .then(json => console.log(json))
-//     }
-// }
-let body = {
-    name: 'd',
-    buyPrice: '2',
-    address: '3214 Mission St',
-    'fees.propertyTax': '2',
-    'fees.hoaFees': '2',
-    'fees.homeInsurance_cost': '2',
-    'fees.renterInsuranceCost': '2',
-    img: ''
+exports.feeParser = (req) => {
+  let fees = {};
+  for (const key in req.body) {
+    if (key.includes("fees.")) {
+      fees[key.slice(5)] = req.body[key];
+    }
   }
-let fees = {}
-for (const key in body){
-    if(key.includes('fees.')){
-        fees[key.slice(5)] = body[key]
-}}
-body.fees = fees
-// Object.keys(body)
-// console.log()
-// console.log(fees)
-let string = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(body.address) + `&key=${process.env.APIKEY}`
-console.log(string)
+  req.body.fees = fees;
+};
+
+exports.MapsAPICall = (req) => {
+  let encodedAddress =
+    "https://maps.googleapis.com/maps/api/geocode/json?address=" +
+    encodeURIComponent(req.body.address) +
+    `&key=${process.env.APIKEY}`;
+  return axios.get(encodedAddress).then(response => {
+    let propertyCoords = response.data.results[0].geometry.location;
+    req.body.location = propertyCoords;
+});
+};
