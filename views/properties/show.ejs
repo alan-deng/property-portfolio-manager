@@ -1,1 +1,34 @@
-<h1>Property Show</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Properties Show</title>
+</head>
+
+<body>
+  <h1>Properties Show Page</h1>
+  <p>
+    <img src="<%= property.img %>" width="320">
+  </p>
+  <p>Property Name: <%=property.name%> <br /></p>
+
+  <p>Buy Price: $<%=property.buyPrice%> <br /></p>
+  <p>Address: <%=property.address%> <br /></p>
+  <p>Yearly Property Tax: $<%=property.fees.propertyTax%> <br /></p>
+  <p>Yearly HOA Fees: $<%=property.fees.hoaFees%> <br /></p>
+  <p>Yearly Home Insurance Cost: $<%=property.fees.homeInsurance_cost%> <br /></p>
+  <p>Yearly Renters Insurance Cost: $<%=property.fees.renterInsuranceCost%></p>
+
+  <nav>
+    <a href="/users/<%=userId%>/properties/">Back to Index</a>
+  </nav>
+
+  <nav>
+    <a href="/users/<%=userId%>/properties/<%=property._id%>/edit">Edit Property</a>
+  </nav>
+
+
+</body>
+
+</html>
