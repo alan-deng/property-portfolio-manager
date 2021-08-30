@@ -32,6 +32,25 @@ propertiesRouter.get("/new", (req, res) => {
   });
 });
 
+// Map page
+propertiesRouter.get('/map', (req, res) => {
+  User.findById(req.params.userId)
+  .populate("ownedProperties")
+  .exec((err, user) => {
+    if(err){
+      res.send(err)
+    } else {
+      res.render('./properties/map.ejs', {
+        userProperties: user.ownedProperties,
+        APIKEY : process.env.APIKEY,
+        userId : req.params.userId
+      })
+    }
+  })
+  
+})
+
+
 //Show (needs properties index view to link to '/users/:userId/properties/:idx)
 propertiesRouter.get("/:idx", (req, res) => {
   Property.findById(req.params.idx, (err, property) => {
