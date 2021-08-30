@@ -18,7 +18,7 @@ tenantsRouter.get('/:id', (req,res)=>{
     if(err){
       res.send(err)
     }else{
-      res.render('./tenant/show.ejs',{
+      res.render('./tenants/show.ejs',{
         tenant: tenant
       })
     }
@@ -41,7 +41,7 @@ tenantsRouter.get('/:id/edit', (req,res)=>{
     if(err){
       res.send(err)
     }else {
-      res.render('./tenant/edit.ejs',{
+      res.render('./tenants/edit.ejs',{
         tenant: tenant
       })
     }
