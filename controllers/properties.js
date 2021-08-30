@@ -41,7 +41,7 @@ propertiesRouter.get('/map', (req, res) => {
       res.send(err)
     } else {
       res.render('./properties/map.ejs', {
-        userProperties: user.ownedProperties,
+        userProperties: JSON.stringify(user.ownedProperties),
         APIKEY : process.env.APIKEY,
         userId : req.params.userId
       })
