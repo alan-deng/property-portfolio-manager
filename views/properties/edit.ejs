@@ -10,14 +10,10 @@
   <h1>Edit Property</h1>
   <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=PUT" method="POST">
 
-
     Name: <input id="name" type="text" name="name" value="<%=property.name%>" />
     <br />
 
     Buy Price: $<input id="buyPrice" type="number" name="buyPrice" value="<%=property.buyPrice%>" />
-    <br />
-
-    Address: <input id="address" type="text" name="address" value="<%=property.address%>" />
     <br />
 
     Yearly Property Tax: $<input id="fees.propertyTax" type="number" name="fees.propertyTax" value="<%=property.fees.propertyTax%>" />
@@ -33,17 +29,13 @@
     <br />
 
     <label for="img">Edit Image URL</label>
-    <input type="text" name="img" id="img" value="<%=property.img%>"/>
+    <input type="text" name="img" id="img" value="<%=property.img%>" /></br>
 
 
-    <input type="submit" name="" value="Edit Property"/>
+    <input type="submit" name="" value="Submit Edit" />
     <nav>
       <a href="/users/<%=userId%>/properties/">Back to Index</a>
     </nav>
-
-
-
-
 
 </body>
 

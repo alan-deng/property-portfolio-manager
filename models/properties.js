@@ -10,12 +10,10 @@ const propertySchema = new mongoose.Schema({
     homeInsurance_cost: Number,
     renterInsuranceCost: Number,
   },
-  tenants: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Tenant",
-    },
-  ],
+  tenants: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Tenant",
+  }, ],
 });
 
 const Property = mongoose.model("Property", propertySchema);
