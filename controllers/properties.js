@@ -1,6 +1,8 @@
 const Property = require("../models/properties");
 const User = require("../models/users");
-const propertiesRouter = require("express").Router({ mergeParams: true });
+const propertiesRouter = require("express").Router({
+  mergeParams: true
+});
 const tenantsRouter = require("./tenants");
 
 // URL is /users/:userId/properties
@@ -52,8 +54,11 @@ propertiesRouter.post("/", (req, res) => {
       res.send("error creating property");
     } else {
       User.findByIdAndUpdate(
-        req.params.userId,
-        { $push: { ownedProperties: property._id } },
+        req.params.userId, {
+          $push: {
+            ownedProperties: property._id
+          }
+        },
         (err) => {
           if (err) {
             res.send("error adding property to list of properties");
@@ -82,7 +87,9 @@ propertiesRouter.get("/:idx/edit", (req, res) => {
 
 //Update
 propertiesRouter.put("/:idx", (req, res) => {
-  Property.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
+  Property.findByIdAndUpdate(req.params.idx, req.body, {
+    new: true
+  }, (err) => {
     if (err) {
       res.send("error updating property");
     } else {
@@ -98,8 +105,9 @@ propertiesRouter.delete("/:idx", (req, res) => {
       res.send("error deleting property");
     } else {
       User.findByIdAndUpdate(
-        req.params.userId,
-        { $pull: req.params.idx },
+        req.params.userId, {
+          $pull: req.params.idx
+        },
         (err) => {
           if (err) {
             res.send("error removing property from user");

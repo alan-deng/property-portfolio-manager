@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Index Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Index Page</title>
 </head>
+
 <body>
-    <h1>Property Index</h1>
+  <h1>Property Index</h1>
+  <ul>
+    <% userProperties.forEach(property => { %>
     <ul>
-        <% userProperties.forEach(property => { %>
-            <li>
-              <p>
-                <img src="<%= property.img %>" width="320">
-              </p>
-              <a href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
+      <p>
+        <img src="<%= property.img %>" width="320">
+      </p>
+      <a href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
 
-              <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=DELETE" method="POST">
-              <input type='submit' value="DELETE"/>
-              </form>
-
-
-
-              </form>
-
-
-
-            </li>
-
-
-
-           <% }) %>
+      <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=DELETE" method="POST">
+        <input type='submit' value="DELETE" />
+      </form>
     </ul>
-   <a href="/users/<%=userId%>/properties/new">Create New Property</a><br/>
-  <!-- add href to edit user -->
+    <% }) %>
+  </ul>
+  <a href="/users/<%=userId%>/properties/new">Add New Property</a><br />
   <a href="/users/<%=userId%>/edit">Edit User Information</a>
 
 </body>
+
 </html>
