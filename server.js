@@ -66,15 +66,8 @@ app.get("/", (req, res) => {
   res.render("login.ejs");
 });
 
-<<<<<<< HEAD
 app.get("/register", (req,res)=>{
   res.render('register.ejs')
 })
 
 app.listen(port);
-=======
-app.listen(PORT);
-
-
-
->>>>>>> main
