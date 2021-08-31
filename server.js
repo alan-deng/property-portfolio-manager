@@ -29,6 +29,7 @@ app.use((req,res,next)=>{
 })
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'))
 
 app.use('/tenants', tenantsRouter);
 app.use("/users", usersRouter);
@@ -65,8 +66,15 @@ app.get("/", (req, res) => {
   res.render("login.ejs");
 });
 
+<<<<<<< HEAD
 app.get("/register", (req,res)=>{
   res.render('register.ejs')
 })
 
 app.listen(port);
+=======
+app.listen(PORT);
+
+
+
+>>>>>>> main
