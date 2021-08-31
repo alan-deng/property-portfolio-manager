@@ -34,7 +34,7 @@ app.use(express.static('public'))
 app.use('/tenants', tenantsRouter);
 app.use("/users", usersRouter);
 const User = require('./models/users')
-const Property = require('./models/properties') 
+const Property = require('./models/properties')
 // User.insertMany([
 //   {
 //     login: 'john smith',
@@ -43,8 +43,8 @@ const Property = require('./models/properties')
 //   {
 //     login: 'jacob tennerman',
 //     ownedProperties: []
-//   }  
-// ], () => console.log('added')) 
+//   }
+// ], () => console.log('added'))
 
 // Property.insertMany([
 //   {
