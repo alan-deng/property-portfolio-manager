@@ -30,7 +30,7 @@ usersRouter.post("/", (req, res) => {
   User.create(req.body, (err, createdUser) => {
     if (err) {
       console.log(err);
-      res.redirect("/users/new");
+      res.redirect("/register");
     } else {
       res.redirect(`/users/${createdUser._id}/properties`);
     }

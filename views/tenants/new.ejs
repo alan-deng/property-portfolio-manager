@@ -1,1 +1,21 @@
-<h1>Tenants New</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New tenant page</title>
+</head>
+<body>
+    <h1>New Tenant page</h1>
+    <form action="/tenants" method="POST">
+        name: <input type="text" name="name"></br>
+        rent: <input type="number" name="rent"></br>
+        contact number: <input type="tel" name="contactNum"></br>
+        contact email: <input type="email" name="contactEmail"></br>
+        property Rented: <input type="text" name="propertyRented"></br>
+        <input type="submit" value="Create New Tenant">
+    </form>
+        
+</body>
+</html>
