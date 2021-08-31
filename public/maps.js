@@ -1,6 +1,4 @@
 userProperties = JSON.parse(userProperties)
-// console.log('inside maps.js')
-// console.log(userProperties)
 // Initialize and add the map
 window.initMap = () => {
     const mapCenter = userProperties[0].location;
@@ -18,10 +16,11 @@ window.initMap = () => {
             let stringToAdd = '';
             if(type === 'fees'){
                 for(let fee in items){
-                    stringToAdd += `<p>${fee}: ${items[fee]}</p><br>`
+                    stringToAdd += `<p>${fee}: ${items[fee]}</p>`
                 }
             } else {
                 for(let tenant of items){
+                    console.log(tenant)
                     stringToAdd += `<p>${tenant.name}</p><br>`
                 }
             }
@@ -36,9 +35,10 @@ window.initMap = () => {
             '<div id="bodyContent">' +
             `<p><b>Address: </b>${property.address}<p><br>` +
             `<p><b>Buy Price ($): </b>${property.buyPrice}<p><br>` +
-            `<p><b>Fees</b></p><br>` + 
+            `<p><b>Fees ($)</b></p>` + 
             HTMLPopulator('fees', property.fees) +
-            HTMLPopulator('fees', property.tenants)
+            `<p><b>Tenants</b></p>` +
+            HTMLPopulator('tenants', property.tenants) +
             "</div>" +
             "</div>";
           const infoWindow = new google.maps.InfoWindow({

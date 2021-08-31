@@ -35,35 +35,15 @@ propertiesRouter.get("/new", (req, res) => {
 // Map page
 propertiesRouter.get('/map', (req, res) => {
   User.findById(req.params.userId)
-  .populate("ownedProperties")
+  .populate({path: "ownedProperties", populate: {path: 'tenants'}})
   .exec((err, user) => {
-    if(err){
-      res.send(err)
-    } else {
-      for(let i = 0; i < user.ownedProperties.length; i++){
-        let currProperty = user.ownedProperties[i]
-        Property.findById(currProperty._id)
-        .populate("tenants")
-        .exec((err, property) => {
-          user.ownedProperties[i] = property
-          console.log('each property')
-          console.log(user.ownedProperties[i])
+    res.render('./properties/map.ejs', {
+      userProperties: JSON.stringify(user.ownedProperties),
+      APIKEY : process.env.APIKEY,
+      userId : req.params.userId
         }
         )
-      }
-      console.log('outside')
-      console.log(user.ownedProperties)
-      res.render('./properties/map.ejs', {
-        userProperties: JSON.stringify(user.ownedProperties),
-        APIKEY : process.env.APIKEY,
-        userId : req.params.userId
-      })
-    }
-  })
-  
-})
-
-
+      })})
 //Show (needs properties index view to link to '/users/:userId/properties/:idx)
 propertiesRouter.get("/:idx", (req, res) => {
   Property.findById(req.params.idx, (err, property) => {
