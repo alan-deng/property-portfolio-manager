@@ -48,7 +48,9 @@ propertiesRouter.get("/map", (req, res) => {
 });
 //Show (needs properties index view to link to '/users/:userId/properties/:idx)
 propertiesRouter.get("/:idx", (req, res) => {
-  Property.findById(req.params.idx, (err, property) => {
+  Property.findById(req.params.idx)
+  .populate('tenants')
+  .exec((err, property) => {
     if (err) {
       res.send("error 404 property not found");
     } else {
