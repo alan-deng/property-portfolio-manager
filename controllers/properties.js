@@ -40,6 +40,19 @@ propertiesRouter.get('/map', (req, res) => {
     if(err){
       res.send(err)
     } else {
+      for(let i = 0; i < user.ownedProperties.length; i++){
+        let currProperty = user.ownedProperties[i]
+        Property.findById(currProperty._id)
+        .populate("tenants")
+        .exec((err, property) => {
+          user.ownedProperties[i] = property
+          console.log('each property')
+          console.log(user.ownedProperties[i])
+        }
+        )
+      }
+      console.log('outside')
+      console.log(user.ownedProperties)
       res.render('./properties/map.ejs', {
         userProperties: JSON.stringify(user.ownedProperties),
         APIKEY : process.env.APIKEY,
