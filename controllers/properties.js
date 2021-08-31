@@ -4,6 +4,7 @@ const propertiesRouter = require("express").Router({
   mergeParams: true
 });
 const tenantsRouter = require("./tenants");
+const calculations = require("../public/calculations");
 
 // URL is /users/:userId/properties
 // all routes are for a specific user
@@ -33,6 +34,18 @@ propertiesRouter.get("/new", (req, res) => {
   });
 });
 
+// Map page
+propertiesRouter.get('/map', (req, res) => {
+  User.findById(req.params.userId)
+  .populate({path: "ownedProperties", populate: {path: 'tenants'}})
+  .exec((err, user) => {
+    res.render('./properties/map.ejs', {
+      userProperties: JSON.stringify(user.ownedProperties),
+      APIKEY : process.env.APIKEY,
+      userId : req.params.userId
+        }
+        )
+      })})
 //Show (needs properties index view to link to '/users/:userId/properties/:idx)
 propertiesRouter.get("/:idx", (req, res) => {
   Property.findById(req.params.idx, (err, property) => {
@@ -46,9 +59,26 @@ propertiesRouter.get("/:idx", (req, res) => {
     }
   });
 });
-
 //New POST
 propertiesRouter.post("/", (req, res) => {
+<<<<<<< HEAD
+  // calculations is imported from the public/calculations file
+  calculations.feeParser(req);
+  calculations.MapsAPICall(req).then(() => {
+    Property.create(req.body, (err, property) => {
+      if (err) {
+        res.send("error creating property");
+      } else {
+        User.findByIdAndUpdate(
+          req.params.userId,
+          { $push: { ownedProperties: property._id } },
+          (err) => {
+            if (err) {
+              res.send("error adding property to list of properties");
+            } else {
+              res.redirect(`/users/${req.params.userId}/properties`);
+            }
+=======
   Property.create(req.body, (err, property) => {
     if (err) {
       res.send("error creating property");
@@ -64,10 +94,11 @@ propertiesRouter.post("/", (req, res) => {
             res.send("error adding property to list of properties");
           } else {
             res.redirect(`/users/${req.params.userId}/properties`);
+>>>>>>> main
           }
-        }
-      );
-    }
+        );
+      }
+    });
   });
 });
 

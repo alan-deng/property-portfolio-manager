@@ -10,6 +10,7 @@ mongoose.connect("mongodb://localhost:27017/properties-manager", {
 
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'))
 
 app.use("/users", usersRouter);
 const User = require("./models/users");
@@ -57,3 +58,6 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT);
+
+
+

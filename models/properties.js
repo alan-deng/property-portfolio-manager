@@ -4,6 +4,10 @@ const propertySchema = new mongoose.Schema({
   name: String,
   buyPrice: Number,
   address: String,
+  location: {
+    lat: Number,
+    lng: Number,
+  },
   fees: {
     propertyTax: Number,
     hoaFees: Number,
