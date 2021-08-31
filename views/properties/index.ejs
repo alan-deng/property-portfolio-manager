@@ -9,32 +9,24 @@
 </head>
 
 <body>
-    <h1>Property Index</h1>
-    
-    <ul>
-      <li>
-        <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
-      </li>
-        <% userProperties.forEach(property => { %>
-            <li>
-              <p>
-                <img src="<%= property.img %>" width="320">
-              </p>
-              <a href="/users/<%=userId%>/properties/<%=property._id%>"><%= property.name%></a>
+  <h1>Property Index</h1>
+  <ul>
+    <li>
+      <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
+    </li>
+    <% userProperties.forEach(property => { %>
+    <li>
+      <p>
+        <img src="<%= property.img %>" width="320">
+      </p>
+      <a href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
 
-              <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=DELETE" method="POST">
-              <input type='submit' value="DELETE"/>
-              </form>
-
-
-
-            </li>
-
-
-
-        <% }) %>
-    </ul>
-
+      <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=DELETE" method="POST">
+        <input type='submit' value="DELETE" />
+      </form>
+    </li>
+    <% }) %>
+  </ul>
   <a href="/users/<%=userId%>/properties/new">Add New Property</a><br />
   <a href="/users/<%=userId%>/edit">Edit User Information</a>
 
