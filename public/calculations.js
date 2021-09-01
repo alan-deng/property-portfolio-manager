@@ -21,6 +21,8 @@ exports.MapsAPICall = (req) => {
   return axios.get(encodedAddress).then(response => {
     let propertyCoords = response.data.results[0].geometry.location;
     req.body.location = propertyCoords;
+}).catch((err)=>{
+  console.log(err);
 });
 };
 
