@@ -18,13 +18,13 @@
 
 ## Functional_Description
 1. Sign up & Sign in
-2. Update
+2. Update<br>
  As a user, be able to update own properties function.
-3. Delete
+3. Delete<br>
  As a user, be able to delete own property list.
-4. Edit
+4. Edit<br>
  As a user, be abe to edit own property's price or tenant's information.
-5. Map API
+5. Map API<br>
  Each property is displayed on a map based on its address.
 
 ## Technologies
@@ -37,8 +37,8 @@
 ![](wireframeImg/wireframe4.png)
 
 ## Authors
-- Created by
-#### github.com/alan-deng (Alan Deng)
-#### github.com/isabellukk (Isabel Luk)
-#### github.com/style6513 (DaeYoung Hwang)
+#### Created by
+- github.com/alan-deng (Alan Deng)
+- github.com/isabellukk (Isabel Luk)
+- github.com/style6513 (DaeYoung Hwang)
 
