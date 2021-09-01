@@ -32,7 +32,7 @@ app.get("/register", (req,res)=>{
 })
 
 app.post("/", (req, res) => {
-  
+
 })
 
 app.listen(port);
