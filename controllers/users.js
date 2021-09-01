@@ -1,21 +1,7 @@
 const User = require("../models/users");
 const usersRouter = require("express").Router();
 const propertiesRouter = require("./properties");
-<<<<<<< HEAD
 const bcrypt = require('bcrypt')
-// Index
-// ... There shouldn't be an index for all users.
-
-// "/" = "/users"
-
-//New
-usersRouter.get("/new", (req, res) => {
-  res.render("./users/new.ejs", {
-    userId: req.body.params,
-  });
-});
-=======
->>>>>>> main
 
 //Show
 usersRouter.get("/:idx", (req, res) => {
