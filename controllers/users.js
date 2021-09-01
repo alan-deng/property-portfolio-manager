@@ -1,6 +1,7 @@
 const User = require("../models/users");
 const usersRouter = require("express").Router();
 const propertiesRouter = require("./properties");
+const calculations = require("../public/calculations");
 
 //Show
 usersRouter.get("/:idx", (req, res) => {
@@ -17,6 +18,7 @@ usersRouter.get("/:idx", (req, res) => {
 
 //New POST
 usersRouter.post("/", (req, res) => {
+  req.body.password = calculations.passwordHash(req.body.password)
   User.create(req.body, (err, createdUser) => {
     if (err) {
       console.log(err);

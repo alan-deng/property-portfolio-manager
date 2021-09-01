@@ -51,7 +51,10 @@ window.initMap = () => {
         shouldFocus: false,
       });
     });
+    map.addListener("click", () => {
+      infoWindow.close();})
   };
+  
   for (const property of userProperties) {
     markerAdder(property);
   }
