@@ -70,4 +70,8 @@ app.get("/register", (req,res)=>{
   res.render('register.ejs')
 })
 
+app.post("/", (req, res) => {
+  
+})
+
 app.listen(port);
