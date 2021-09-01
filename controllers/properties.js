@@ -48,16 +48,18 @@ propertiesRouter.get("/map", (req, res) => {
 });
 //Show (needs properties index view to link to '/users/:userId/properties/:idx)
 propertiesRouter.get("/:idx", (req, res) => {
-  Property.findById(req.params.idx, (err, property) => {
-    if (err) {
-      res.send("error 404 property not found");
-    } else {
-      res.render("./properties/show.ejs", {
-        property: property,
-        userId: req.params.userId,
-      });
-    }
-  });
+  Property.findById(req.params.idx)
+    .populate("tenants")
+    .exec((err, property) => {
+      if (err) {
+        res.send("error 404 property not found");
+      } else {
+        res.render("./properties/show.ejs", {
+          property: property,
+          userId: req.params.userId,
+        });
+      }
+    });
 });
 //New POST
 propertiesRouter.post("/", (req, res) => {
@@ -100,23 +102,14 @@ propertiesRouter.get("/:idx/edit", (req, res) => {
 
 //Update
 propertiesRouter.put("/:idx", (req, res) => {
-  calculations.feeParser(req);
-  Property.findByIdAndUpdate(
-    req.params.idx,
-    req.body,
-    {
-      new: true,
-    },
-    (err) => {
-      if (err) {
-        res.send("error updating property");
-      } else {
-        res.redirect(
-          `/users/${req.params.userId}/properties/${req.params.idx}`
-        );
-      }
+  Property.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
+    if (err) {
+      console.log(err);
+      res.send("error updating property");
+    } else {
+      res.redirect(`/users/${req.params.userId}/properties/${req.params.idx}`);
     }
-  );
+  });
 });
 
 //Delete Route

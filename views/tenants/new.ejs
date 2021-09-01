@@ -8,13 +8,14 @@
 </head>
 <body>
     <h1>New Tenant page</h1>
-    <form action="/tenants" method="POST">
-        name: <input type="text" name="name"></br>
-        rent: <input type="number" name="rent"></br>
-        contact number: <input type="tel" name="contactNum"></br>
-        contact email: <input type="email" name="contactEmail"></br>
-        property Rented: <input type="text" name="propertyRented"></br>
-        <input type="submit" value="Create New Tenant">
+    <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants" method="POST">
+        Name: <input type="text" name="name"></br>
+        Rent: <input type="number" name="rent"></br>
+        Contact number: <input type="tel" name="contactNum"></br>
+        Contact email: <input type="email" name="contactEmail"></br>
+        Property Rented: <input type="text" id="display-property" value="<%=propertyRented.name%>" disabled></br>
+        <input type="hidden" name="propertyRented" value="<%=propertyId%>">
+        <input type="submit" value="Add New Tenant">
     </form>
         
 </body>

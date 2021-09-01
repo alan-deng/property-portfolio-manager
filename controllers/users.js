@@ -1,6 +1,7 @@
 const User = require("../models/users");
 const usersRouter = require("express").Router();
 const propertiesRouter = require("./properties");
+<<<<<<< HEAD
 const bcrypt = require('bcrypt')
 // Index
 // ... There shouldn't be an index for all users.
@@ -13,6 +14,8 @@ usersRouter.get("/new", (req, res) => {
     userId: req.body.params,
   });
 });
+=======
+>>>>>>> main
 
 //Show
 usersRouter.get("/:idx", (req, res) => {
@@ -44,9 +47,7 @@ usersRouter.post("/", (req, res) => {
 
 //Edit Page
 usersRouter.get("/:idx/edit", (req, res) => {
-  User.find({
-    _id: req.params.idx
-  }, (err, user) => {
+  User.findById(req.params.idx, (err, user) => {
     if (err) {
       res.send("error 404 user not found");
     } else {
