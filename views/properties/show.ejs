@@ -19,9 +19,23 @@
   <p>Yearly HOA Fees: $<%=property.fees.hoaFees%> <br /></p>
   <p>Yearly Home Insurance Cost: $<%=property.fees.homeInsurance_cost%> <br /></p>
   <p>Yearly Renters Insurance Cost: $<%=property.fees.renterInsuranceCost%></p>
+  <p><b>Tenants</b></p>
+  <%for (let i = 0; i < property.tenants.length; i++){%>
+    <p><%=property.tenants[i].name%></p>
+    <nav>
+      <a href="/users/<%=userId%>/properties/<%=property._id%>/tenants/<%=property.tenants[i]._id%>/edit" >Edit Tenant</a>
+      <form action="/users/<%=userId%>/properties/<%=property._id%>/tenants/<%=property.tenants[i]._id%>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete Tenant">
+      </form>
+    </nav>
+
+    
+  <%}%>
+
 
   <nav>
     <a href="/users/<%=userId%>/properties/">Back to Index</a>
+    <a href="/users/<%=userId%>/properties/<%=property._id%>/tenants/new">Add Tenant</a>
   </nav>
 
   <nav>

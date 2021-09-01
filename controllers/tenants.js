@@ -1,4 +1,5 @@
 const express = require("express");
+const { findById } = require("../models/properties");
 const Property = require("../models/properties");
 const Tenant = require("../models/tenants");
 const tenantsRouter = require("express").Router({ mergeParams: true });
@@ -10,89 +11,88 @@ const tenantsRouter = require("express").Router({ mergeParams: true });
 //================Route====================
 // New
 tenantsRouter.get("/new", (req, res) => {
-  res.render("./tenants/new.ejs");
+  Property.findById(req.params.propertyId, (err, property) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render("./tenants/new.ejs", {
+        propertyRented: property,
+        userId: req.params.userId,
+        propertyId: req.params.propertyId,
+      });
+    }
+  });
 });
 
 // Show
 tenantsRouter.get("/:id", (req, res) => {
-  const id = req.params.id;
-  Tenant.findById(id, (err, tenant) => {
+  const tenantId = req.params.id;
+  Tenant.findById(tenantId, (err, tenant) => {
     if (err) {
       res.send(err);
     } else {
       res.render("./tenants/show.ejs", {
         tenant: tenant,
-        id: id,
+        id: tenantId,
+        userId: req.params.userId,
+        propertyId: req.params.propertyId
       });
     }
   });
-});
-
-// Index
-tenantsRouter.get("/", (req, res) => {
-  if (req.session.currentUser) {
-    Tenant.find(
-      { propertyRented: req.session.currentUser._id },
-      (err, allTenants) => {
-        if (err) {
-          res.send(err);
-        } else {
-          console.log(allTenants);
-          res.render("./tenants/index.ejs", {
-            tenants: allTenants,
-            currentUser: req.session.currentUser,
-          });
-        }
-      }
-    );
-  } else {
-    res.redirect("/");
-  }
 });
 
 //Index Route
 tenantsRouter.get("/", (req, res) => {
-  console.log(req.session);
-  Tenant.find({}, (err, allTenants) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.render("./tenants/index.ejs", {
-        tenants: allTenants,
-        currentUser: req.session.currentUser,
-      });
-    }
-  });
+  Property.findById(req.params.propertyId)
+    .populate("tenants")
+    .exec((err, property) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.render("./tenants/index.ejs", {
+          tenants: property.tenants,
+          userId: req.params.userId,
+          propertyId: req.params.propertyId,
+          property: property
+          // commenting out until sessions implemented
+          // currentUser: req.session.currentUser,
+        });
+      }
+    });
 });
 
 // New Post
-tenantsRouter.post("/", async (req, res) => {
+tenantsRouter.post("/", (req, res) => {
   try {
-    const foundName = req.session.currentUser.name;
-    let loggedInUser = await User.findOne({ name: foundName });
-
-    let newTenant = await tenant.create({
-      ...req.body,
-      propertyRented: loggedInUser,
+    Tenant.create(req.body, (err, newTeanant) => {
+      Property.findByIdAndUpdate(
+        req.body.propertyRented,
+        { $push: { tenants: newTeanant._id } },
+        { new: true },
+        (err, updatedProperty) => {
+          console.log(err || updatedProperty);
+        }
+      );
+      res.redirect(
+        `/users/${req.params.userId}/properties/${req.params.propertyId}`
+      );
     });
-    newTenant.propertyRented = loggedInUser;
-
-    await newTenant.save();
-    return res.redirect("./tenants");
-  } catch (entered) {
-    console.error(e);
-    res.send("Something went wrong");
+  } catch (err) {
+    console.error(err);
+    res.send("Unable to create tenant");
   }
 });
 
 // Edit
 tenantsRouter.get("/:id/edit", (req, res) => {
-  Tenant.find({ _id: req.params.id }, (err, tenant) => {
+  Tenant.findById(req.params.id, (err, tenant) => {
     if (err) {
       res.send(err);
     } else {
       res.render("./tenants/edit.ejs", {
         tenant: tenant,
+        userId: req.params.userId,
+        propertyId: req.params.propertyId
       });
     }
   });
@@ -100,27 +100,29 @@ tenantsRouter.get("/:id/edit", (req, res) => {
 
 // PUT&Update
 tenantsRouter.put("/:id", (req, res) => {
-  Tenant.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true },
-    (err, updatedTenantData) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.redirect(`/users/${req.params.userId}/properties/${req.params.id}`);
-      }
+  Tenant.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.redirect(
+        `/users/${req.params.userId}/properties/${req.params.propertyId}`
+      );
     }
-  );
+  });
 });
 
 // Delete
 tenantsRouter.delete("/:id", (req, res) => {
+  Property.findByIdAndUpdate(req.params.propertyId, {$pull: {tenants: req.params.id}}, {new: true}, (err, updatedProperty) => {
+    console.log(err || updatedProperty)
+  })
   Tenant.findByIdAndDelete(req.params.id, (err, deletedTenant) => {
     if (err) {
       res.send(err);
     } else {
-      res.redirect(`/users/${req.params.userId}/properties/`);
+      res.redirect(
+        `/users/${req.params.userId}/properties/${req.params.propertyId}`
+      );
     }
   });
 });

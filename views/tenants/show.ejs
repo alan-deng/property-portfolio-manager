@@ -6,14 +6,10 @@
   </head>
   <body>
     <h1>Tenants show page</h1>
-    <p>
-      <%= tenant.name %>
-      <%= tenant.rent%>
-      <%= tenant.contactNum%>
-      <%= tenant.contactEmail%>
-      <%= tenant.propertyRented%>
-
-    </p>
-    <a href="/tenants">Back to Index</a>
+    <p>Name: <%= tenant.name %></p>
+    <p>Rent: <%= tenant.rent%></p>
+    <p>Contact Number: <%= tenant.contactNum%></p>
+    <p>Contact Email: <%= tenant.contactEmail%></p>
+    <a href="/users/<%=userId%>/properties/<%=propertyId%>/tenants">Back to Property Tenants List</a>
   </body>
 </html>

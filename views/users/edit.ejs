@@ -10,7 +10,7 @@
   <h1>Edit User</h1>
   <form action="/users/<%=userId%>?_method=PUT" method="POST">
 
-    Login: <input id="login" type="text" name="login" />
+    Login: <input id="login" type="text" name="login" value="<%=user.login%>" disabled />
     <br />
 
     New Password: <input id="password" type="text" name="password" /><br />

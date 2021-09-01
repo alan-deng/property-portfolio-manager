@@ -5,19 +5,19 @@
     <title>Tenants Index</title>
   </head>
   <body>
-    <h1>Tenants Index Page</h1>
+    <h1><%=property.name%> Tenants List</h1>
     <ul>
-      <% for (let i = 0; i < tenant.length; i++) { %>
+      <% for (let i = 0; i < tenants.length; i++) { %>
       <li>
-        <a href="/tenants/<%=i%>">
-          <%=tenant[i].name%>
+        <a href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenants[i]._id%>">
+          <%=tenants[i].name%>
         </a>
-        <form action="/tenants/<%=i%>?_method=DELETE" method="POST">
+        <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenants[i]._id%>?_method=DELETE" method="POST">
           <input type='submit' value="DELETE"/>
         </form>
       </li>
       <% } %>
     </ul>
-    <a href="/tenants/new">Create new tenant</a>
+    <a href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/new">Create new tenant</a>
   </body>
 </html>
