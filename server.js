@@ -15,18 +15,7 @@ mongoose.connect("mongodb://localhost:27017/properties-manager", {
 });
 
 //===============Middleware===================
-app.use(
-  session({
-      secret: process.env.SECRET,
-      resave: false,
-      saveUninitialized: false
-  })
-)
 
-app.use((req,res,next)=>{
-  req.session.isOnline = true
-  next();
-})
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
@@ -43,7 +32,7 @@ app.get("/register", (req,res)=>{
 })
 
 app.post("/", (req, res) => {
-  
+
 })
 
 app.listen(port);
