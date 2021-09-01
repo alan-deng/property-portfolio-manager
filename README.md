@@ -19,13 +19,13 @@
 ## Functional_Description
 1. Sign up & Sign in
 2. Update
->> As a user, be able to update own properties function.
+ As a user, be able to update own properties function.
 3. Delete
->> As a user, be able to delete own property list.
+ As a user, be able to delete own property list.
 4. Edit
->> As a user, be abe to edit own property's price or tenant's information.
+ As a user, be abe to edit own property's price or tenant's information.
 5. Map API
->> Each property is displayed on a map based on its address.
+ Each property is displayed on a map based on its address.
 
 ## Technologies
 - HTML, JS, NODE.JS, EXPRESS, BOOTSTRAP, MONGO, MONGOOSE, XYZ API, BCRYPT, METHOD-OVERRIDE, EXPRESS-SESSION
@@ -38,7 +38,7 @@
 
 ## Authors
 - Created by
->>github.com/alan-deng (Alan Deng)
->>github.com/isabellukk (Isabel Luk)
->>github.com/style6513 (DaeYoung Hwang)
+#### github.com/alan-deng (Alan Deng)
+#### github.com/isabellukk (Isabel Luk)
+#### github.com/style6513 (DaeYoung Hwang)
 
