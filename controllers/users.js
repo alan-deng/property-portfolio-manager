@@ -2,16 +2,6 @@ const User = require("../models/users");
 const usersRouter = require("express").Router();
 const propertiesRouter = require("./properties");
 
-// Index
-// ... There shouldn't be an index for all users.
-
-//New
-usersRouter.get("/new", (req, res) => {
-  res.render("./users/new.ejs", {
-    userId: req.body.params,
-  });
-});
-
 //Show
 usersRouter.get("/:idx", (req, res) => {
   User.findById(req.params.idx, (err, user) => {
@@ -39,9 +29,7 @@ usersRouter.post("/", (req, res) => {
 
 //Edit Page
 usersRouter.get("/:idx/edit", (req, res) => {
-  User.find({
-    _id: req.params.idx
-  }, (err, user) => {
+  User.findById(req.params.idx, (err, user) => {
     if (err) {
       res.send("error 404 user not found");
     } else {

@@ -6,12 +6,11 @@
     </head>
     <body>
       <h1>EDIT Tenants Page</h1>
-      <form action="/tenants/<%=id%>?_method=PUT" method="POST">
-        name: <input type="text" name="name"></br>
-        rent: <input type="number" name="rent"></br>
-        contact number: <input type="tel" name="contactNum"></br>
-        contact email: <input type="email" name="contactEmail"></br>
-        property Rented: <input type="text" name="propertyRented"></br>
+      <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenant._id%>?_method=PUT" method="POST">
+        Name: <input type="text" name="name" value="<%=tenant.name%>"></br>
+        Rent: <input type="number" name="rent" value="<%=tenant.rent%>"></br>
+        Contact number: <input type="tel" name="contactNum" value="<%=tenant.contactNum%>"></br>
+        Contact email: <input type="email" name="contactEmail" value="<%=tenant.contactEmail%>"></br>
         <input type="submit" value="Edit Tenant">
       </form>
     </body>
