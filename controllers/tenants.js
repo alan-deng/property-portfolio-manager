@@ -1,7 +1,9 @@
 const express = require('express')
 const Property = require("../models/properties");
 const Tenant = require("../models/tenants");
+const User = require('../models/users')
 const tenantsRouter = require('express').Router({ mergeParams: true });
+const bcrypt = require('bcrypt')
 
 
 // URL is /users/:userId/properties/:propertyId/tenants
@@ -13,6 +15,8 @@ const tenantsRouter = require('express').Router({ mergeParams: true });
 tenantsRouter.get('/new', (req,res)=>{
   res.render('./tenants/new.ejs')
 })
+
+// "/" = "/tenants"
 
 // Show
 tenantsRouter.get('/:id', (req,res)=>{
@@ -63,19 +67,55 @@ tenantsRouter.get('/',(req,res)=>{
 })
 
 // New Post
-tenantsRouter.post('/', async (req,res)=>{
+// tenantsRouter.post('/', async (req,res)=>{
+//   try {
+//     const foundName = req.session.currentUser.name;
+//     let loggedInUser = await User.findOne({ name : foundName });
+    
+//     let newTenant = await tenant.create({ ...req.body, propertyRented : loggedInUser});
+//     newTenant.propertyRented = loggedInUser;
+    
+//     await newTenant.save();
+//     return res.redirect('./tenants')
+//   }catch(entered) {
+//     console.error(e);
+//     res.send("Something went wrong")
+//   }
+// })
+
+// POST route orginal
+
+// tenantsRouter.post('/',(req,res)=>{
+//   if(req.session.currentUser){
+//     Tenant.create(req.body, (err,newTenant)=>{
+//       if(err){
+//         return res.send(err);
+//       }
+//       console.log("newTenant", newTenant);
+//     })
+//   }else{
+//     res.redirect('/');
+//   }
+// })
+
+// POST route newone
+
+tenantsRouter.post('/', async (req, res)=>{
+  console.log(req.session.currentUser)
   try {
-    const foundName = req.session.currentUser.name;
-    let loggedInUser = await User.findOne({ name : foundName });
-    
-    let newTenant = await tenant.create({ ...req.body, propertyRented : loggedInUser});
-    newTenant.propertyRented = loggedInUser;
-    
-    await newTenant.save();
-    return res.redirect('./tenants')
-  }catch(entered) {
-    console.error(e);
-    res.send("Something went wrong")
+      const foundUsername = req.session.currentUser.login;
+      let loggedInUser = await User.findOne({ login : foundUsername });
+      
+      let newTenant = await Tenant.create({ ...req.body, propertyRented : loggedInUser});
+      newTenant.createdBy = loggedInUser;
+      
+      await newTenant.save();
+      console.log('newTenant is : ',newTenant);
+      console.log('loggedInUser is :', loggedInUser);
+      return res.redirect("/");
+    } catch(e) {
+      console.error(e);
+      res.send("something wen't wrong")
   }
 })
 
@@ -100,7 +140,7 @@ tenantsRouter.put('/:id', (req,res)=>{
     if(err){
       res.send(err)
     }else{
-      res.redirect('/${req.params.id}')
+      res.redirect(`/${req.params.id}`)
     }
   })
 })

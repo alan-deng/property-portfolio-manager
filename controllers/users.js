@@ -1,9 +1,11 @@
 const User = require("../models/users");
 const usersRouter = require("express").Router();
 const propertiesRouter = require("./properties");
-
+const bcrypt = require('bcrypt')
 // Index
 // ... There shouldn't be an index for all users.
+
+// "/" = "/users"
 
 //New
 usersRouter.get("/new", (req, res) => {
@@ -25,8 +27,11 @@ usersRouter.get("/:idx", (req, res) => {
   });
 });
 
+
 //New POST
 usersRouter.post("/", (req, res) => {
+  const pwHash = bcrypt.hashSync(req.body.password, 10)
+  req.body.password = pwHash;
   User.create(req.body, (err, createdUser) => {
     if (err) {
       console.log(err);
@@ -60,7 +65,7 @@ usersRouter.put("/:idx", (req, res) => {
       new: true
     }, (err) => {
       if (err) {
-        res.send("error updating user information");
+        res.send("error updating tenant's information");
       } else {
         res.redirect(`/users/${req.params.idx}/properties`);
       }
