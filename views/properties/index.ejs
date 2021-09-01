@@ -6,14 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Index Page</title>
+  <script src="https://kit.fontawesome.com/c2796a7354.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" rel="stylesheet">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel='stylesheet' href='/style.css'>
 </head>
 
 <body>
+
   <h1>Property Index</h1>
-  <ul>
-    <li>
-      <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
-    </li>
+  <li>
+    <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
+  </li>
+<div class="container-fluid">
+
+
+
     <% userProperties.forEach(property => { %>
     <li>
       <p>
@@ -26,10 +36,15 @@
       </form>
     </li>
     <% }) %>
-  </ul>
+</div>
+
+
   <a href="/users/<%=userId%>/properties/new">Add New Property</a><br />
   <a href="/users/<%=userId%>/edit">Edit User Information</a>
+</div>
+</div>
 
+</div>
 </body>
 
 </html>
