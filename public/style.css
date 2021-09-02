@@ -9,10 +9,25 @@
     /* The width is the width of the web page */
   }
 
-
+h1 {
+  text-align: center;
+}
+.card-custom {
+  max-width: 20vw;
+}
+.card-img{
+  width: 50%;
+  object-fit: contain;
+}
+p {
+  margin-bottom: 5px;
+}
+.bg-secondary{
+  background-color: rgba(77, 77, 77, 0.514)!important;
+}
 
 html,body{
-background-image: url('https://www.wallpapertip.com/wmimgs/176-1765437_nature-aesthetic-background-desktop.jpg');
+background-color:rgba(210, 245, 252, 0.712);
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
