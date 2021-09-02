@@ -22,15 +22,19 @@ h1 {
 p {
   margin-bottom: 5px;
 }
-.bg-secondary{
-  background-color: rgba(77, 77, 77, 0.514)!important;
-}
-p, a {
+
+p, a, form{
   color: #D7BA89
 }
 
 li a {
   color: #56342A
+}
+.card p {
+  margin: 5px
+}
+.bg-primary {
+  background-color: #B68E65 !important;
 }
 
 .bg-secondary {
