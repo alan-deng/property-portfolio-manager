@@ -1,16 +1,10 @@
 # Project #1 : Property Portfolio Manager(by Team AIDs)
 
 # Index : 
-- [Usage](#Usage)
 - [Description](#Description)
 - [Functional Description]([#Functional])
 - [Technologies](#Technologies)
 - [Authors](#Authors)
-
-## Usage
-- User click a button to bring user to a page to input user's housing information and have it added to the database.(Rental price, Address etc)
-- User go to the "My houses" listing, and see a page displaying all user's houses and all relevant information.
-- User is able to manage their all tenant's information in "My houses" page
 
 ## Description
 - This is an app that allows property owners to organize and manage their properties & tenants' information
