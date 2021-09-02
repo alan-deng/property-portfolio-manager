@@ -47,13 +47,13 @@
         </ul>
         </div>
       </nav>
-      <div class="card mx-auto" style="width:50rem;">
-    <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants" method="POST">
-        Name: <input type="text" name="name"></br>
-        Rent: <input type="number" name="rent"></br>
-        Contact number: <input type="tel" name="contactNum"></br>
-        Contact email: <input type="email" name="contactEmail"></br>
-        Property Rented: <input type="text" id="display-property" value="<%=propertyRented.name%>" disabled></br>
+      <div class="card mx-auto" style="width:40rem;">
+    <form class='mx-2'action="/users/<%=userId%>/properties/<%=propertyId%>/tenants" method="POST">
+        Name: <input class='mb-2' type="text" name="name"></br>
+        Rent: <input class='mb-2' type="number" name="rent"></br>
+        Contact number: <input class='mb-2' type="tel" name="contactNum"></br>
+        Contact email: <input class='mb-2' type="email" name="contactEmail"></br>
+        Property Rented: <input class='mb-2' type="text" id="display-property" value="<%=propertyRented.name%>" disabled></br>
         <input type="hidden" name="propertyRented" value="<%=propertyId%>">
         <input type="submit" value="Add New Tenant">
     </form>

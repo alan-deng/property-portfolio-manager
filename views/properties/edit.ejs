@@ -32,25 +32,25 @@
     </ul>
     </div>
   </nav>
-  <div class="card mx-auto" style="width:50rem;">
+  <div class="card mx-auto" style="width:40rem;">
   <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=PUT" method="POST">
 
-    Name: <input id="name" type="text" name="name" value="<%=property.name%>" />
+    Name: <input class='mb-2' id="name" type="text" name="name" value="<%=property.name%>" />
     <br />
 
-    Buy Price: $<input id="buyPrice" type="number" name="buyPrice" value="<%=property.buyPrice%>" />
+    Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" value="<%=property.buyPrice%>" />
     <br />
 
-    Yearly Property Tax: $<input id="fees.propertyTax" type="number" name="fees.propertyTax" value="<%=property.fees.propertyTax%>" />
+    Yearly Property Tax: $<input class='mb-2' id="fees.propertyTax" type="number" name="fees.propertyTax" value="<%=property.fees.propertyTax%>" />
     <br />
 
-    Yearly HOA Fees: $<input id="fees.hoaFees" type="number" name="fees.hoaFees" value="<%=property.fees.hoaFees%>" />
+    Yearly HOA Fees: $<input class='mb-2' id="fees.hoaFees" type="number" name="fees.hoaFees" value="<%=property.fees.hoaFees%>" />
     <br />
 
-    Yearly Home Insurance Cost: $<input id="fees.homeInsurance_cost" type="number" name="fees.homeInsurance_cost" value="<%=property.fees.homeInsurance_cost%>" />
+    Yearly Home Insurance Cost: $<input class='mb-2' id="fees.homeInsurance_cost" type="number" name="fees.homeInsurance_cost" value="<%=property.fees.homeInsurance_cost%>" />
     <br />
 
-    Yearly Renters Insurance Cost: $<input id="fees.hoaFees" type="number" name="fees.renterInsuranceCost" value="<%=property.fees.renterInsuranceCost%>" />
+    Yearly Renters Insurance Cost: $<input class='mb-2' id="fees.hoaFees" type="number" name="fees.renterInsuranceCost" value="<%=property.fees.renterInsuranceCost%>" />
     <br />
 
     <label for="img">Edit Image URL</label>

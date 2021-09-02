@@ -35,12 +35,12 @@
   <div class="card mx-auto" style="width:50rem;">
   <form action="/users/<%=userId%>?_method=PUT" method="POST">
 
-    Login: <input id="login" type="text" name="login" value="<%=user.login%>" disabled />
+    Login: <input class='mb-2' id="login" type="text" name="login" value="<%=user.login%>" disabled />
     <br />
 
-    New Password: <input id="password" type="text" name="password" /><br />
+    New Password: <input class='mb-2' id="password" type="text" name="password" /><br />
 
-    Confirm Password: <input id="password" type="text" name="password1" /><br />
+    Confirm Password: <input class='mb-2' id="password" type="text" name="password1" /><br />
 
     <input type="submit" name="" value="Edit Login Information" />
   </div>
