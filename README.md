@@ -5,7 +5,6 @@
 - [Description](#Description)
 - [Functional Description]([#Functional])
 - [Technologies](#Technologies)
-- [Wireframes](#Wireframes)
 - [Authors](#Authors)
 
 ## Usage
@@ -31,14 +30,8 @@
 ## Technologies
 - HTML, JS, Node.js, Express, Bootstrap, MongoDB, Mongoose, bCrypt
 
-## Wireframes
-![](wireframeImg/wireframe1.png)
-![](wireframeImg/wireframe2.png)
-![](wireframeImg/wireframe3.png)
-![](wireframeImg/wireframe4.png)
-
 ## Authors
-#### Created by
+
 - github.com/alan-deng (Alan Deng)
 - github.com/isabellukk (Isabel Luk)
 - github.com/style6513 (DaeYoung Hwang)
