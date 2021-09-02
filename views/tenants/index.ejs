@@ -55,11 +55,14 @@
         <form class="d-inline" action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenants[i]._id%>?_method=DELETE" method="POST">
           <input type='submit' value="Remove Tenant"/>
         </form>
+        <div class="card mx-auto" style="width:50rem;">
+
         <br>
         <p>Rent ($): <%=tenants[i].rent%></p>
         <p>Contact Number: <%=tenants[i].contactNum%></p>
         <p>Email: <%=tenants[i].contactEmail%></p>
         <br>
       <% } %>
+  </div>
   </body>
 </html>

@@ -45,10 +45,13 @@
       </ul>
       </div>
     </nav>
+    <div class="card mx-auto" style="width:50rem;">
+
     <p>Name: <%= tenant.name %></p>
     <p>Rent ($): <%= tenant.rent%></p>
     <p>Contact Number: <%= tenant.contactNum%></p>
     <p>Email: <%= tenant.contactEmail%></p>
     <a href="/users/<%=userId%>/properties/<%=propertyId%>/tenants">Back to Property Tenants List</a>
+  </div>
   </body>
 </html>

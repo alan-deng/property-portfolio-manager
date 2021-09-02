@@ -32,6 +32,8 @@
     </ul>
     </div>
   </nav>
+  <div class="card mx-auto" style="width:50rem;">
+
   <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=PUT" method="POST">
 
     Name: <input id="name" type="text" name="name" value="<%=property.name%>" />
@@ -58,6 +60,7 @@
 
     <input type="submit" name="" value="Submit Edit" />
 
+</div>
 </body>
 
 </html>

@@ -1,6 +1,9 @@
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 @import url('https://fonts.google.com/specimen/Roboto#standard-styles');
 
+* font {
+  font-family: 'Arial';
+}
 
 #map {
     height: 800px;
@@ -8,6 +11,7 @@
     width: 100%;
     /* The width is the width of the web page */
   }
+
 
 h1 {
   text-align: center;
@@ -19,6 +23,7 @@ h1 {
   width: 50%;
   object-fit: contain;
 }
+
 p {
   margin-bottom: 5px;
 }
@@ -27,12 +32,14 @@ p {
 }
 
 html,body{
-background-color:rgba(210, 245, 252, 0.712);
+background-image: linear-gradient(#008080, #fff6e4);
+  box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
 background-size: cover;
-background-repeat: no-repeat;
+background-attachment: fixed;
 height: 100%;
 font-family: sans-serif;
 }
+
 
 .container{
 height: 100%;
@@ -41,16 +48,15 @@ align-content: center;
 
 .infoContainer{
   height: 100%;
-
-
 }
 
+
 .card{
-height: 370px;
+height: auto;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+background-color: rgba(225,225,225,0.5) !important;
 }
 
 .card-header h2{
@@ -74,8 +80,7 @@ box-shadow: 0 0 0 0 !important;
 color: white;
 }
 
-.remember input
-{
+.remember input{
 width: 20px;
 height: 20px;
 margin-left: 15px;
@@ -99,4 +104,9 @@ color: white;
 
 .links a{
 margin-left: 4px;
+}
+
+.navbar:hover {
+color: black;
+background-color: white;
 }
