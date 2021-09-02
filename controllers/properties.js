@@ -13,7 +13,7 @@ const calculations = require("../public/calculations");
 //Index for a particular user's properties
 propertiesRouter.get("/", (req, res) => {
   User.findById(req.params.userId)
-    .populate("ownedProperties")
+    .populate({ path: "ownedProperties", populate: { path: "tenants" } })
     .exec((err, user) => {
       if (err) {
         res.send(err);

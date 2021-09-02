@@ -4,15 +4,52 @@
 <head>
   <meta charset="utf-8" />
   <title>Properties Show</title>
+  <script src="https://kit.fontawesome.com/c2796a7354.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" rel="stylesheet">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel='stylesheet' href='/style.css'>
 </head>
 
 <body>
   <h1>Properties Show Page</h1>
-  <p>
-    <img src="<%= property.img %>" width="320">
-  </p>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+    <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
+      <li class="nav-item mx-4">
+        <a href="/users/<%=userId%>/properties/">Home Page</a>
+      </li>
+      <li class="nav-item mx-4">
+        <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
+      </li>
+      <li class="nav-item mx-4">
+        <a href="/users/<%=userId%>/properties/new">Add New Property</a><br />
+      </li>
+      <li class="nav-item mx-4">
+        <a href="/users/<%=userId%>/edit">Edit User Information</a>
+      </li>
+    </ul>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <div class="collapse navbar-collapse">
+    <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
+      <li class="nav-item mx-4">
+        <a class="text-light" href="/users/<%=userId%>/properties/<%=property._id%>/edit">Edit Property Info</a>
+      </li>
+      <li class="nav-item mx-4">
+        <a class="text-light" href="/users/<%=userId%>/properties/<%=property._id%>/tenants/new">Add Tenant</a>
+      </li>
+      <li class="nav-item mx-4">
+        <a class="text-light" href="/users/<%=userId%>/properties/<%=property._id%>/tenants/">Tenant Details</a>
+      </li>
+    </ul>
+    </div>
+  </nav>
+  <div class='container'>
+    <div class='row'><img class='center-block' src="<%= property.img %>" width="320"></div>
   <p>Property Name: <%=property.name%> <br /></p>
-
   <p>Buy Price: $<%=property.buyPrice%> <br /></p>
   <p>Address: <%=property.address%> <br /></p>
   <p>Yearly Property Tax: $<%=property.fees.propertyTax%> <br /></p>
@@ -21,26 +58,11 @@
   <p>Yearly Renters Insurance Cost: $<%=property.fees.renterInsuranceCost%></p>
   <p><b>Tenants</b></p>
   <%for (let i = 0; i < property.tenants.length; i++){%>
-    <p><%=property.tenants[i].name%></p>
-    <nav>
-      <a href="/users/<%=userId%>/properties/<%=property._id%>/tenants/<%=property.tenants[i]._id%>/edit" >Edit Tenant</a>
-      <form action="/users/<%=userId%>/properties/<%=property._id%>/tenants/<%=property.tenants[i]._id%>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete Tenant">
-      </form>
-    </nav>
-
-    
+    <p ><%=property.tenants[i].name%></p>
   <%}%>
+  </div>
+  
 
-
-  <nav>
-    <a href="/users/<%=userId%>/properties/">Back to Index</a>
-    <a href="/users/<%=userId%>/properties/<%=property._id%>/tenants/new">Add Tenant</a>
-  </nav>
-
-  <nav>
-    <a href="/users/<%=userId%>/properties/<%=property._id%>/edit">Edit Property</a>
-  </nav>
 
 
 </body>
