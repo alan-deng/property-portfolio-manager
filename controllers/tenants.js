@@ -1,5 +1,3 @@
-const express = require("express");
-const { findById } = require("../models/properties");
 const Property = require("../models/properties");
 const Tenant = require("../models/tenants");
 const tenantsRouter = require("express").Router({ mergeParams: true });
