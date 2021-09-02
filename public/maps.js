@@ -16,12 +16,12 @@ window.initMap = () => {
       let stringToAdd = "";
       if (type === "fees") {
         for (let fee in items) {
-          stringToAdd += `<p>${fee}: ${items[fee]}</p>`;
+          stringToAdd += `<p style='color:black !important'>${fee}: ${items[fee]}</p>`;
         }
       } else {
         for (let tenant of items) {
           console.log(tenant);
-          stringToAdd += `<p>${tenant.name}</p><br>`;
+          stringToAdd += `<p style='color:black !important'>${tenant.name}</p><br>`;
         }
       }
       return stringToAdd;
@@ -31,13 +31,13 @@ window.initMap = () => {
       '<div id="siteNotice">' +
       "</div>" +
       `<img style='max-width: 80%'src='${property.img || ""}'>` +
-      `<h1 id="firstHeading" class="firstHeading">${property.name}</h1>` +
+      `<h1 style='color:black !important' id="firstHeading" class="firstHeading">${property.name}</h1>` +
       '<div id="bodyContent">' +
-      `<p><b>Address: </b>${property.address}<p><br>` +
-      `<p><b>Buy Price ($): </b>${property.buyPrice}<p><br>` +
-      `<p><b>Fees ($)</b></p>` +
+      `<p style='color:black !important'><b>Address: </b>${property.address}<p><br>` +
+      `<p style='color:black !important'><b>Buy Price ($): </b>${property.buyPrice}<p><br>` +
+      `<p style='color:black !important'><b>Fees ($)</b></p>` +
       HTMLPopulator("fees", property.fees) +
-      `<p><b>Tenants</b></p>` +
+      `<p style='color:black !important'><b>Tenants</b></p>` +
       HTMLPopulator("tenants", property.tenants) +
       "</div>" +
       "</div>";
