@@ -14,7 +14,7 @@
 
 <body>
   <h1>Edit User Information</h1>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
     <div class="collapse navbar-collapse">
     <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
       <li class="nav-item mx-4">
@@ -32,17 +32,18 @@
     </ul>
     </div>
   </nav>
+  <div class="card mx-auto" style="width:50rem;">
   <form action="/users/<%=userId%>?_method=PUT" method="POST">
 
-    Login: <input id="login" type="text" name="login" value="<%=user.login%>" disabled />
+    Login: <input class='mb-2' id="login" type="text" name="login" value="<%=user.login%>" disabled />
     <br />
 
-    New Password: <input id="password" type="text" name="password" /><br />
+    New Password: <input class='mb-2' id="password" type="text" name="password" /><br />
 
-    Confirm Password: <input id="password" type="text" name="password1" /><br />
+    Confirm Password: <input class='mb-2' id="password" type="text" name="password1" /><br />
 
     <input type="submit" name="" value="Edit Login Information" />
-
+  </div>
 </body>
 
 </html>

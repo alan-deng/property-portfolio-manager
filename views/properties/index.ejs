@@ -17,10 +17,10 @@
 <body>
 
   <h1>Property Index</h1>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse">
-    <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
-      <li class="nav-item mx-4">
+  <nav class="navbar navbar-expand-lg bg-secondary">
+    <div class="collapse navbar-collapse text-dark">
+    <ul class='navbar-nav mx-auto mb-2 mb-lg-0 text-dark'>
+      <li class="nav-item mx-4 text-dark">
         <a href="/users/<%=userId%>/properties/">Home Page</a>
       </li>
       <li class="nav-item mx-4">
@@ -42,7 +42,7 @@
     <% userProperties.forEach(property => { %>
       <div class="card card-custom mx-2 mb-3">
         <img class='card-image' src="<%= property.img %>"   height="50%" object-fit="contain" >
-        <a href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
+        <a class='mx-2'href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
         <p><%= property.address%></p>
         <p><b>Tenants</b></p>
         <%if(!property.tenants.length){%>
@@ -54,9 +54,6 @@
             <p>More tenants in details page</p>
           <%}%>
         <%}%>
-        <!-- <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=DELETE" method="POST">
-          <input type='submit' value="DELETE PROPERTY" />
-        </form> -->
       </div>
       <% }) %>
   </div>

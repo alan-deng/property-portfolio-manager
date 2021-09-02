@@ -22,12 +22,27 @@ h1 {
 p {
   margin-bottom: 5px;
 }
-.bg-secondary{
-  background-color: rgba(77, 77, 77, 0.514)!important;
+
+p, a, form{
+  color: #D7BA89
+}
+
+li a {
+  color: #56342A
+}
+.card p {
+  margin: 5px
+}
+.bg-primary {
+  background-color: #B68E65 !important;
+}
+
+.bg-secondary {
+  background-color: #D7BA89 !important;
 }
 
 html,body{
-background-color:rgba(210, 245, 252, 0.712);
+background-color:#56342A;
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
