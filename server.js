@@ -3,25 +3,34 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODBURI;
-const session = require("express-session");
-const bcrypt = require("bcrypt");
 const methodOverride = require("method-override");
+const session = require("express-session");
 const mongoose = require("mongoose");
-const usersRouter = require("./controllers/users");
 const User = require("./models/users");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const MongoStore = require('connect-mongo')
+const bcrypt = require("bcrypt");
+const usersRouter = require("./controllers/users");
 
+//===============Middleware===================
 mongoose.connect(mongodbURI, {
   useNewUrlParser: true,
 });
 
-//===============Middleware===================
+const mongoStoreOptions = { 
+  mongoUrl: mongodbURI
+}
+
 app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    store: MongoStore.create(mongoStoreOptions),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 // expires in 1 day. 1000ms/sec * 60sec/min * 60 min/hr * 24 hr/day
+    }
   })
 );
 
@@ -35,6 +44,8 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session())
 
+
+//passport config
 const verifyCallback = (username, password, done) => {
   User.findOne({ login: username })
       .then((user) => {
@@ -54,10 +65,10 @@ const verifyCallback = (username, password, done) => {
 passport.use(
   new LocalStrategy({usernameField: 'login'}, verifyCallback)
 );
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user._id);
 });
-passport.deserializeUser(function(userId, done) {
+passport.deserializeUser((userId, done) => {
   User.findById(userId, (err, user) => {
       if (err) { return done(err); }
       done(null, user);
@@ -75,8 +86,14 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
-app.post("/", passport.authenticate('local', {failureRedirect: '/'}), (req, res, next) => {
-  res.redirect(`/users/${req.session.passport.user}/properties`)
+//logout. deletes req.session.passport.user.
+app.get('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/')
+})
+
+app.post("/login", passport.authenticate('local', {failureRedirect: '/'}), (req, res, next) => {
+  res.redirect(`/users/${req.user._id}/properties`)
 }
 );
 
