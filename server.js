@@ -6,11 +6,8 @@ const mongodbURI = process.env.MONGODBURI;
 const methodOverride = require("method-override");
 const session = require("express-session");
 const mongoose = require("mongoose");
-const User = require("./models/users");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 const MongoStore = require('connect-mongo')
-const bcrypt = require("bcrypt");
 const usersRouter = require("./controllers/users");
 
 //===============Middleware===================
@@ -41,43 +38,16 @@ app.use((req, res, next) => {
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+//===============Passport config===============
+require('./config/passport')
 app.use(passport.initialize());
 app.use(passport.session())
 
-
-//passport config
-const verifyCallback = (username, password, done) => {
-  User.findOne({ login: username })
-      .then((user) => {
-        if (!user) { return done(null, false, {message: 'Incorrect username'}) }
-        const isValid = bcrypt.compareSync(password, user.password)
-        if (isValid) {
-            return done(null, user);
-        } else {
-            return done(null, false, {message: 'Incorrect Password'});
-        }
-      })
-      .catch((err) => {   
-          done(err);
-      });
-
-}
-passport.use(
-  new LocalStrategy({usernameField: 'login'}, verifyCallback)
-);
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-passport.deserializeUser((userId, done) => {
-  User.findById(userId, (err, user) => {
-      if (err) { return done(err); }
-      done(null, user);
-  });
-});
-
-
+//===============Router===============
 app.use("/users", usersRouter);
 
+//===============Unauthenticated routes===============
 app.get("/", (req, res) => {
   res.render("login.ejs");
 });
@@ -86,7 +56,6 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
-//logout. deletes req.session.passport.user.
 app.get('/logout', (req, res) => {
   req.logOut()
   res.redirect('/')
