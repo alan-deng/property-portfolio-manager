@@ -11,7 +11,7 @@ const tenantsRouter = require("express").Router({ mergeParams: true });
 tenantsRouter.get("/new", (req, res) => {
   Property.findById(req.params.propertyId, (err, property) => {
     if (err) {
-      res.send(err);
+      res.redirect("/error");
     } else {
       res.render("./tenants/new.ejs", {
         propertyRented: property,
@@ -27,13 +27,13 @@ tenantsRouter.get("/:id", (req, res) => {
   const tenantId = req.params.id;
   Tenant.findById(tenantId, (err, tenant) => {
     if (err) {
-      res.send(err);
+      res.redirect("/error");
     } else {
       res.render("./tenants/show.ejs", {
         tenant: tenant,
         id: tenantId,
         userId: req.params.userId,
-        propertyId: req.params.propertyId
+        propertyId: req.params.propertyId,
       });
     }
   });
@@ -45,13 +45,13 @@ tenantsRouter.get("/", (req, res) => {
     .populate("tenants")
     .exec((err, property) => {
       if (err) {
-        res.send(err);
+        res.redirect("/error");
       } else {
         res.render("./tenants/index.ejs", {
           tenants: property.tenants,
           userId: req.params.userId,
           propertyId: req.params.propertyId,
-          property: property
+          property: property,
           // commenting out until sessions implemented
           // currentUser: req.session.currentUser,
         });
@@ -76,8 +76,7 @@ tenantsRouter.post("/", (req, res) => {
       );
     });
   } catch (err) {
-    console.error(err);
-    res.send("Unable to create tenant");
+    res.redirect("/error");
   }
 });
 
@@ -85,12 +84,12 @@ tenantsRouter.post("/", (req, res) => {
 tenantsRouter.get("/:id/edit", (req, res) => {
   Tenant.findById(req.params.id, (err, tenant) => {
     if (err) {
-      res.send(err);
+      res.redirect("/error");
     } else {
       res.render("./tenants/edit.ejs", {
         tenant: tenant,
         userId: req.params.userId,
-        propertyId: req.params.propertyId
+        propertyId: req.params.propertyId,
       });
     }
   });
@@ -100,7 +99,7 @@ tenantsRouter.get("/:id/edit", (req, res) => {
 tenantsRouter.put("/:id", (req, res) => {
   Tenant.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err) => {
     if (err) {
-      res.send(err);
+      res.redirect("/error");
     } else {
       res.redirect(
         `/users/${req.params.userId}/properties/${req.params.propertyId}`
@@ -111,12 +110,17 @@ tenantsRouter.put("/:id", (req, res) => {
 
 // Delete
 tenantsRouter.delete("/:id", (req, res) => {
-  Property.findByIdAndUpdate(req.params.propertyId, {$pull: {tenants: req.params.id}}, {new: true}, (err, updatedProperty) => {
-    console.log(err || updatedProperty)
-  })
+  Property.findByIdAndUpdate(
+    req.params.propertyId,
+    { $pull: { tenants: req.params.id } },
+    { new: true },
+    (err, updatedProperty) => {
+      console.log(err || updatedProperty);
+    }
+  );
   Tenant.findByIdAndDelete(req.params.id, (err, deletedTenant) => {
     if (err) {
-      res.send(err);
+      res.redirect("/error");
     } else {
       res.redirect(
         `/users/${req.params.userId}/properties/${req.params.propertyId}`

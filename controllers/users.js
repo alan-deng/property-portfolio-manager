@@ -7,7 +7,7 @@ const calculations = require("../public/calculations");
 usersRouter.get("/:idx", (req, res) => {
   User.findById(req.params.idx, (err, user) => {
     if (err) {
-      res.send("error 404 user not found");
+      res.redirect("/error");
     } else {
       res.render("./users/show.ejs", {
         user: user,
@@ -38,7 +38,7 @@ usersRouter.post("/", (req, res) => {
 usersRouter.get("/:idx/edit", (req, res) => {
   User.findById(req.params.idx, (err, user) => {
     if (err) {
-      res.send("error 404 user not found");
+      res.redirect("/error");
     } else {
       res.render("./users/edit.ejs", {
         user: user,
@@ -59,7 +59,7 @@ usersRouter.put("/:idx", (req, res) => {
       },
       (err) => {
         if (err) {
-          res.send("error updating user information");
+          res.redirect("/error");
         } else {
           res.redirect(`/users/${req.params.idx}/properties`);
         }
@@ -74,7 +74,7 @@ usersRouter.put("/:idx", (req, res) => {
 usersRouter.delete("/:idx", (req, res) => {
   User.findByIdAndDelete(req.params.idx, (err, deletedUser) => {
     if (err) {
-      res.send("error deleting user");
+      res.redirect("/error");
     } else {
       res.redirect("/");
     }

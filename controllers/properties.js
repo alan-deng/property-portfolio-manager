@@ -19,7 +19,7 @@ propertiesRouter.get("/", (req, res) => {
     .populate({ path: "ownedProperties", populate: { path: "tenants" } })
     .exec((err, user) => {
       if (err) {
-        res.send(err);
+        res.redirect("/error");
       } else {
         // console.log(user);
         res.render("./properties/index.ejs", {
@@ -55,7 +55,7 @@ propertiesRouter.get("/:idx", (req, res) => {
     .populate("tenants")
     .exec((err, property) => {
       if (err) {
-        res.send("error 404 property not found");
+        res.redirect("/error");
       } else {
         res.render("./properties/show.ejs", {
           property: property,
@@ -71,14 +71,14 @@ propertiesRouter.post("/", (req, res) => {
   calculations.MapsAPICall(req).then(() => {
     Property.create(req.body, (err, property) => {
       if (err) {
-        res.send("error creating property");
+        res.redirect("/error");
       } else {
         User.findByIdAndUpdate(
           req.params.userId,
           { $push: { ownedProperties: property._id } },
           (err) => {
             if (err) {
-              res.send("error adding property to list of properties");
+              res.redirect("/error");
             } else {
               res.redirect(`/users/${req.params.userId}/properties`);
             }
@@ -93,7 +93,7 @@ propertiesRouter.post("/", (req, res) => {
 propertiesRouter.get("/:idx/edit", (req, res) => {
   Property.findById(req.params.idx, (err, property) => {
     if (err) {
-      res.send("error 404 user not found");
+      res.redirect("/error");
     } else {
       res.render("./properties/edit.ejs", {
         property: property,
@@ -108,8 +108,7 @@ propertiesRouter.put("/:idx", (req, res) => {
   calculations.feeParser(req);
   Property.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
     if (err) {
-      console.log(err);
-      res.send("error updating property");
+      res.redirect("/error");
     } else {
       res.redirect(`/users/${req.params.userId}/properties/${req.params.idx}`);
     }
@@ -120,7 +119,7 @@ propertiesRouter.put("/:idx", (req, res) => {
 propertiesRouter.delete("/:idx", (req, res) => {
   Property.findByIdAndDelete(req.params.idx, (err) => {
     if (err) {
-      res.send("error deleting property");
+      res.redirect("/error");
     } else {
       User.findByIdAndUpdate(
         req.params.userId,
@@ -129,7 +128,7 @@ propertiesRouter.delete("/:idx", (req, res) => {
         },
         (err) => {
           if (err) {
-            res.send("error removing property from user");
+            res.redirect("/error");
           }
         }
       );

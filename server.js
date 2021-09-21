@@ -64,6 +64,10 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+app.get("/error", (req, res) => {
+  res.render("error.ejs");
+});
+
 app.post(
   "/login",
   passport.authenticate("local", {
