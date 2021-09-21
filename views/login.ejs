@@ -26,7 +26,10 @@
           <h2>Login</h2>
         </div>
         <div class="card-body">
-
+          
+          <% for (error of errors){%>
+            <p><%= error %></p>
+          <%}%>
           <form action="/login" method="POST">
 
             <div class="input-group form-group">

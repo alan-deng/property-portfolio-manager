@@ -23,7 +23,9 @@
             <h2>Register Here</h2>
           </div>
           <div class="card-body">
-
+            <% for (error of errors){%>
+              <p><%= error %></p>
+            <%}%>
             <form action="/users" method="POST">
 
               <div class="input-group form-group">

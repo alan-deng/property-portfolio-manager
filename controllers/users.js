@@ -18,13 +18,18 @@ usersRouter.get("/:idx", (req, res) => {
 
 //New POST
 usersRouter.post("/", (req, res) => {
-  req.body.password = calculations.passwordHash(req.body.password)
+  req.body.password = calculations.passwordHash(req.body.password);
   User.create(req.body, (err, createdUser) => {
     if (err) {
-      console.log(err);
       res.redirect("/register");
     } else {
-      res.redirect(`/users/${createdUser._id}/properties`);
+      req.login(createdUser, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect(`/users/${createdUser._id}/properties`);
+        }
+      });
     }
   });
 });
@@ -46,15 +51,20 @@ usersRouter.get("/:idx/edit", (req, res) => {
 //Update
 usersRouter.put("/:idx", (req, res) => {
   if (req.body.password === req.body.password1) {
-    User.findByIdAndUpdate(req.params.idx, req.body, {
-      new: true
-    }, (err) => {
-      if (err) {
-        res.send("error updating user information");
-      } else {
-        res.redirect(`/users/${req.params.idx}/properties`);
+    User.findByIdAndUpdate(
+      req.params.idx,
+      req.body,
+      {
+        new: true,
+      },
+      (err) => {
+        if (err) {
+          res.send("error updating user information");
+        } else {
+          res.redirect(`/users/${req.params.idx}/properties`);
+        }
       }
-    });
+    );
   } else {
     res.send("error, passwords do not match");
   }
