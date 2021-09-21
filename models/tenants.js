@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const tenantSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   rent: Number,
   contactNum: Number,
   contactEmail: String,
   propertyRented: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Property",
+    required: true,
   },
 });
 

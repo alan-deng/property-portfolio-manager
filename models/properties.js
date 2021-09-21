@@ -1,23 +1,29 @@
 const mongoose = require("mongoose");
+
 const propertySchema = new mongoose.Schema({
   img: String,
-  name: String,
+  name: { type: String, required: true },
   buyPrice: Number,
-  address: String,
+  address: {
+    type: String,
+    required: true,
+  },
   location: {
     lat: Number,
     lng: Number,
   },
-  fees: {
-    propertyTax: Number,
-    hoaFees: Number,
-    homeInsurance_cost: Number,
-    renterInsuranceCost: Number,
-  },
-  tenants: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Tenant",
-  }, ],
+  fees: [
+    {
+      name: String,
+      amount: Number,
+    },
+  ],
+  tenants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Tenant",
+    },
+  ],
 });
 
 const Property = mongoose.model("Property", propertySchema);

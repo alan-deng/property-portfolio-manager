@@ -52,7 +52,7 @@
   <div class="card mx-auto" style="width:40rem;">
   <form action="/users/<%=userId%>/properties/<%=property._id%>?_method=PUT" method="POST">
 
-    Name: <input class='mb-2' id="name" type="text" name="name" value="<%=property.name%>" />
+    Name: <input class='mb-2' id="name" type="text" name="name" value="<%=property.name%>" required/>
     <br />
 
     Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" value="<%=property.buyPrice%>" />

@@ -47,7 +47,7 @@
       </nav>
       <div class="card mx-auto" style="width:50rem;">
       <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenant._id%>?_method=PUT" method="POST">
-        Name: <input type="text" name="name" value="<%=tenant.name%>"></br>
+        Name: <input type="text" name="name" value="<%=tenant.name%>" required></br>
         Rent: <input type="number" name="rent" value="<%=tenant.rent%>"></br>
         Contact number: <input type="tel" name="contactNum" value="<%=tenant.contactNum%>"></br>
         Contact email: <input type="email" name="contactEmail" value="<%=tenant.contactEmail%>"></br>

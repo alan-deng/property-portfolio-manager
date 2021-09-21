@@ -61,7 +61,7 @@ app.get('/logout', (req, res) => {
   res.redirect('/')
 })
 
-app.post("/login", passport.authenticate('local', {failureRedirect: '/'}), (req, res, next) => {
+app.post("/login", passport.authenticate('local', {failureRedirect: '/'}), (req, res) => {
   res.redirect(`/users/${req.user._id}/properties`)
 }
 );

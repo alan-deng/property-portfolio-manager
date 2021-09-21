@@ -35,13 +35,13 @@
   <div class="card mx-auto" style="width:40rem;">
   <form action="/users/<%=userId%>/properties" method="POST">
 
-    Name: <input class='mb-2' id="name" type="text" name="name" />
+    Name: <input class='mb-2' id="name" type="text" name="name" required />
     <br />
 
     Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" />
     <br />
 
-    Address: <input class='mb-2' id="address" type="text" name="address" />
+    Address: <input class='mb-2' id="address" type="text" name="address" required />
     <br />
 
     Yearly Property Tax: $<input class='mb-2' id="fees.propertyTax" type="number" name="fees.propertyTax" />
