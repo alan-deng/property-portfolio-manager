@@ -4,27 +4,16 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
 exports.feeParser = (req) => {
-  let fees = {};
+  let fees = [];
   for (const key in req.body) {
-    if (key.includes("fees.")) {
-      fees[key.slice(5)] = req.body[key];
+    if (key.includes("fees_name")) {
+      const name = req.body[key];
+      const number = req.body[key.replace("name", "value")];
+      fees.push({ name: name, amount: parseInt(number) });
     }
   }
   req.body.fees = fees;
 };
-
-let fees = [];
-for (const key in req.boy) {
-  if (key.includes("fees.name")) {
-    const name = req.body[key];
-    const number = req.body[key.replace("name", "value")];
-    fees.push({ [name]: number });
-  }
-}
-req.body.fees = fees;
-
-misc_name_1: "this";
-misc_value_1: "that";
 
 exports.MapsAPICall = (req) => {
   let encodedAddress =

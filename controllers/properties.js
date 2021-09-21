@@ -5,17 +5,16 @@ const propertiesRouter = require("express").Router({
 });
 const tenantsRouter = require("./tenants");
 const calculations = require("../public/calculations");
-const auth = require('./auth')
+const auth = require("./auth");
 // URL is /users/:userId/properties
 // all routes are for a specific user
 // user id can be accessed by req.params.userId in all below routes
 
 //auth middleware
-propertiesRouter.use(auth.isAuth)
+propertiesRouter.use(auth.isAuth);
 
 //Index for a particular user's properties
 propertiesRouter.get("/", (req, res) => {
-  
   User.findById(req.params.userId)
     .populate({ path: "ownedProperties", populate: { path: "tenants" } })
     .exec((err, user) => {

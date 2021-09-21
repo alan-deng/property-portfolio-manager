@@ -56,10 +56,10 @@
   <p>Property Name: <%=property.name%> </p>
   <p>Buy Price: $<%=property.buyPrice%> <br /></p>
   <p>Address: <%=property.address%> <br /></p>
-  <p>Yearly Property Tax: $<%=property.fees.propertyTax%> <br /></p>
-  <p>Yearly HOA Fees: $<%=property.fees.hoaFees%> <br /></p>
-  <p>Yearly Home Insurance Cost: $<%=property.fees.homeInsurance_cost%> <br /></p>
-  <p>Yearly Renters Insurance Cost: $<%=property.fees.renterInsuranceCost%></p>
+  <p>Misc Fees</p>
+  <% for (fee of property.fees){%>
+    <p><%= fee.name %>: <%= fee.amount %></p>
+  <%}%>
   <p><b>Tenants</b></p>
   <%for (let i = 0; i < property.tenants.length; i++){%>
     <p ><%=property.tenants[i].name%></p>

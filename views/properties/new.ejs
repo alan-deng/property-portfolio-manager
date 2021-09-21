@@ -10,6 +10,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <link rel='stylesheet' href='/style.css'>
+  <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 </head>
 
 <body>
@@ -33,36 +34,33 @@
     </div>
   </nav>
   <div class="card mx-auto" style="width:40rem;">
-  <form action="/users/<%=userId%>/properties" method="POST">
+  <form action="/users/<%=userId%>/properties" method="POST" id='new_prop_form'>
 
-    Name: <input class='mb-2' id="name" type="text" name="name" required />
+    <label for="name">Name: </label><input class='mb-2' id="name" type="text" name="name" required />
     <br />
 
-    Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" />
+    <label for="buyPrice"></label>Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" />
     <br />
 
-    Address: <input class='mb-2' id="address" type="text" name="address" required />
+    <label for="address"></label>Address: <input class='mb-2' id="address" type="text" name="address" required />
     <br />
-
-    Yearly Property Tax: $<input class='mb-2' id="fees.propertyTax" type="number" name="fees.propertyTax" />
+    <label for="img">Add Image URL</label><input type="text" name="img" id="img" /> 
     <br />
+    <p id='new_misc_fee'>Add Misc Fee</p>
 
-    Yearly HOA Fees: $<input class='mb-2' id="fees.hoaFees" type="number" name="fees.hoaFees" />
-    <br />
-
-    Yearly Home Insurance Cost: $<input class='mb-2' id="fees.homeInsurance_cost" type="number" name="fees.homeInsurance_cost" />
-    <br />
-
-    Yearly Renters Insurance Cost: $<input class='mb-2' id="fees.hoaFees" type="number" name="fees.renterInsuranceCost" />
-    <br />
-
-    <label for="img">Add Image URL</label>
-    <input type="text" name="img" id="img" /> <br />
-    <input type="submit" name="" value="Create Property" /><br />
-
+    <input type="submit" name="" value="Create Property" id='create_prop_btn' /><br />
 
   </form>
 </div>
+<script>
+  let i = 0
+  $('#new_misc_fee').on('click', () => {
+    $(`<label for='fees_name_${i}'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
+    <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `).insertBefore("#create_prop_btn")
+    i++
+  })
+
+</script>
 </body>
 
 </html>
