@@ -105,6 +105,7 @@ propertiesRouter.get("/:idx/edit", (req, res) => {
 
 //Update
 propertiesRouter.put("/:idx", (req, res) => {
+  calculations.feeParser(req);
   Property.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
     if (err) {
       console.log(err);

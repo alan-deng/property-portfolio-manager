@@ -10,6 +10,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <link rel='stylesheet' href='/style.css'>
+  <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 </head>
 
 <body>
@@ -58,24 +59,30 @@
     Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" value="<%=property.buyPrice%>" />
     <br />
 
-    Yearly Property Tax: $<input class='mb-2' id="fees.propertyTax" type="number" name="fees.propertyTax" value="<%=property.fees.propertyTax%>" />
-    <br />
 
-    Yearly HOA Fees: $<input class='mb-2' id="fees.hoaFees" type="number" name="fees.hoaFees" value="<%=property.fees.hoaFees%>" />
-    <br />
-
-    Yearly Home Insurance Cost: $<input class='mb-2' id="fees.homeInsurance_cost" type="number" name="fees.homeInsurance_cost" value="<%=property.fees.homeInsurance_cost%>" />
-    <br />
-
-    Yearly Renters Insurance Cost: $<input class='mb-2' id="fees.hoaFees" type="number" name="fees.renterInsuranceCost" value="<%=property.fees.renterInsuranceCost%>" />
-    <br />
-
+    
     <label for="img">Edit Image URL</label>
     <input type="text" name="img" id="img" value="<%=property.img%>" /></br>
-
-
-    <input type="submit" name="" value="Submit Edit" />
+    <div id='misc_fees'>
+    <p>Misc Fees</p>
+    <% for (let i = 0; i < property.fees.length; i++){%>
+      <label for='fees_name_<%=i%>'>Fee Name: </label><input type="text" name='fees_name_<%=i%>' id='fees_name_<%=i%>' value='<%=property.fees[i].name%>' /> 
+      <label for='fees_value_<%=i%>'>Fee Amount: </label><input type="number" name='fees_value_<%=i%>' id='fees_value_<%=i%>' value='<%=property.fees[i].amount%>' /> 
+    <%}%>
+    </div>
+    <p id='new_misc_fee'>Add Misc Fee</p>
+    <input type="submit" name="" value="Submit Edit" id='edit_prop_btn' />
   </div>
+  <script>
+    let lastFee = $('#misc_fees :last-child')
+    let i = parseInt(lastFee.attr('name').slice(-1)) + 1
+    $('#new_misc_fee').on('click', () => {
+      $('#misc_fees').append(`<label for='fees_name_${i}'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
+      <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `)
+      i++
+    })
+  
+  </script>
 </body>
 
 </html>

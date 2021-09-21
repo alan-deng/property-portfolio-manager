@@ -1,66 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>New Views Property</title>
+    <script
+      src="https://kit.fontawesome.com/c2796a7354.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+      rel="stylesheet"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>New Views Property</title>
-  <script src="https://kit.fontawesome.com/c2796a7354.js" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" rel="stylesheet">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <link rel='stylesheet' href='/style.css'>
-  <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-</head>
+  <body>
+    <h1>Add New Property</h1>
+    <nav class="navbar navbar-expand-lg bg-secondary">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item mx-4">
+            <a href="/users/<%=userId%>/properties/">Home Page</a>
+          </li>
+          <li class="nav-item mx-4">
+            <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
+          </li>
+          <li class="nav-item mx-4">
+            <a href="/users/<%=userId%>/properties/new">Add New Property</a
+            ><br />
+          </li>
+          <li class="nav-item mx-4">
+            <a href="/users/<%=userId%>/edit">Edit User Information</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="card mx-auto" style="width: 40rem">
+      <form
+        action="/users/<%=userId%>/properties"
+        method="POST"
+        id="new_prop_form"
+      >
+        <label for="name">Name: </label
+        ><input class="mb-2" id="name" type="text" name="name" required />
+        <br />
 
-<body>
-  <h1> Add New Property</h1>
-  <nav class="navbar navbar-expand-lg bg-secondary">
-    <div class="collapse navbar-collapse">
-    <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
-      <li class="nav-item mx-4">
-        <a href="/users/<%=userId%>/properties/">Home Page</a>
-      </li>
-      <li class="nav-item mx-4">
-        <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
-      </li>
-      <li class="nav-item mx-4">
-        <a href="/users/<%=userId%>/properties/new">Add New Property</a><br />
-      </li>
-      <li class="nav-item mx-4">
-        <a href="/users/<%=userId%>/edit">Edit User Information</a>
-      </li>
-    </ul>
+        <label for="buyPrice"></label>Buy Price: $<input
+          class="mb-2"
+          id="buyPrice"
+          type="number"
+          name="buyPrice"
+        />
+        <br />
+
+        <label for="address"></label>Address:
+        <input class="mb-2" id="address" type="text" name="address" required />
+        <br />
+        <label for="img">Add Image URL</label
+        ><input type="text" name="img" id="img" />
+        <br />
+        <p id="new_misc_fee">Add Misc Fee</p>
+        <div id="misc_fees"></div>
+        <input
+          type="submit"
+          name=""
+          value="Create Property"
+          id="create_prop_btn"
+        /><br />
+      </form>
     </div>
-  </nav>
-  <div class="card mx-auto" style="width:40rem;">
-  <form action="/users/<%=userId%>/properties" method="POST" id='new_prop_form'>
-
-    <label for="name">Name: </label><input class='mb-2' id="name" type="text" name="name" required />
-    <br />
-
-    <label for="buyPrice"></label>Buy Price: $<input class='mb-2' id="buyPrice" type="number" name="buyPrice" />
-    <br />
-
-    <label for="address"></label>Address: <input class='mb-2' id="address" type="text" name="address" required />
-    <br />
-    <label for="img">Add Image URL</label><input type="text" name="img" id="img" /> 
-    <br />
-    <p id='new_misc_fee'>Add Misc Fee</p>
-
-    <input type="submit" name="" value="Create Property" id='create_prop_btn' /><br />
-
-  </form>
-</div>
-<script>
-  let i = 0
-  $('#new_misc_fee').on('click', () => {
-    $(`<label for='fees_name_${i}'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
-    <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `).insertBefore("#create_prop_btn")
-    i++
-  })
-
-</script>
-</body>
-
+    <script>
+      let i = 0;
+      $("#new_misc_fee").on("click", () => {
+        $("#misc_fees")
+          .append(`<label for='fees_name_${i}'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
+    <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `);
+        i++;
+      });
+    </script>
+  </body>
 </html>
