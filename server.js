@@ -59,14 +59,14 @@ app.get("/register", (req, res) => {
   res.render("register.ejs", { errors: errors });
 });
 
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
+// app.get(
+//   "/auth/google",
+//   passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//   })
+// );
 
-app.get("/auth/google/redirect", passport.authenticate("google"));
+// app.get("/auth/google/redirect", passport.authenticate("google"));
 
 app.get("/logout", (req, res) => {
   req.logOut();

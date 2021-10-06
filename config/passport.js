@@ -1,6 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+// const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
@@ -22,20 +22,20 @@ const verifyCallback = (username, password, done) => {
     });
 };
 passport.use(new LocalStrategy({ usernameField: "login" }, verifyCallback));
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.clientID,
-      clientSecret: process.env.clientSecret,
-      callbackURL: "/auth/google/redirect",
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        return cb(err, user);
-      });
-    }
-  )
-);
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.clientID,
+//       clientSecret: process.env.clientSecret,
+//       callbackURL: "/auth/google/redirect",
+//     },
+//     (accessToken, refreshToken, profile, cb) => {
+//       User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//         return cb(err, user);
+//       });
+//     }
+//   )
+// );
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
