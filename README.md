@@ -10,7 +10,7 @@
 - [Authors]([#Authors])
 
 ------------------------------
-### Features 
+### `Features`
 
 - Full CRUD functionality on property and tenant information (read, add, edit, and delete)
 - Using Google Maps and Places APIs, a user can see a map that displays a user’s property locations, along with associated information on each property
