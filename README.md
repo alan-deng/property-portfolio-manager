@@ -2,13 +2,6 @@
 
 ### An app that allows property owners to organize and manage their properties & tenants' information
 
-### `Index`
-- [Features](#Features)
-- [Technologies](#Technologies)
-- [Images](#Images)
-- [Planned Features](#Planned-Features)
-- [Authors](#Authors)
-
 ------------------------------
 ### `Features`
 
