@@ -4,10 +4,10 @@
 
 ### `Index`
 - [Features](#Features)
-- [Technologies]([#Technologies])
-- [Images]([#Images])
-- [Planned Features]([#Planned-Features])
-- [Authors]([#Authors])
+- [Technologies](#Technologies)
+- [Images](#Images)
+- [Planned Features](#Planned-Features)
+- [Authors](#Authors)
 
 ------------------------------
 ### `Features`
