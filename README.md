@@ -2,7 +2,7 @@
 
 ### An app that allows property owners to organize and manage their properties & tenants' information
 
-# Index : 
+### `Index`
 - [Features]([#Features])
 - [Technologies]([#Technologies])
 - [Images]([#Images])
@@ -10,7 +10,7 @@
 - [Authors]([#Authors])
 
 ------------------------------
-### `Features` <a name="Features"></a>
+### `Features` 
 
 - Full CRUD functionality on property and tenant information (read, add, edit, and delete)
 - Using Google Maps and Places APIs, a user can see a map that displays a user’s property locations, along with associated information on each property
