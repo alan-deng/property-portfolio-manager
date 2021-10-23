@@ -27,9 +27,9 @@ Bootstrap, MongoDB, Node.js, Express, HTML, JS, Passsport, bCrypt
 -------------------------------
 ### `Authors` <a name="Authors"></a>
 
-- github.com/alan-deng (Alan Deng)
-- github.com/isabellukk (Isabel Luk)
-- github.com/style6513 (DaeYoung Hwang)
+- [github.com/alan-deng] (github.com/alan-deng) (Alan Deng)
+- [github.com/isabellukk] (github.com/isabellukk) (Isabel Luk)
+- [github.com/style6513] (github.com/style6513) (DaeYoung Hwang)
 
 
 
