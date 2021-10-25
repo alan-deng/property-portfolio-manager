@@ -47,9 +47,10 @@
     </nav>
     <div class="card mx-auto" style="width: 40rem">
       <form
-        action="/users/<%=userId%>/properties"
+        action="/users/<%=userId%>/properties/image"
         method="POST"
         id="new_prop_form"
+        enctype="multipart/form-data"
       >
         <label for="name">Name: </label
         ><input class="mb-2" id="name" type="text" name="name" required />
@@ -66,8 +67,8 @@
         <label for="address"></label>Address:
         <input class="mb-2" id="address" type="text" name="address" required />
         <br />
-        <label for="img">Add Image URL</label
-        ><input type="text" name="img" id="img" />
+        <label for="test_upload">Add Image URL</label
+        ><input type="file" name="test_upload" id="test_upload" accept="image/png, image/jpeg" />
         <br />
         <p id="new_misc_fee">Add Misc Fee</p>
         <div id="misc_fees"></div>

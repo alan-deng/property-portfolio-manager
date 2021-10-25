@@ -1,3 +1,9 @@
+//AWS image uploads
+require("../config/aws");
+const express = require("express"); //is this needed? already in server.js
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 const Property = require("../models/properties");
 const User = require("../models/users");
 const propertiesRouter = require("express").Router({
@@ -12,6 +18,12 @@ const auth = require("./auth");
 
 //auth middleware
 propertiesRouter.use(auth.isAuth);
+
+//photo upload test
+propertiesRouter.post("/image", upload.single("test_upload"), (req, res) => {
+  console.log(req.file);
+  res.send("uploaded");
+});
 
 //Index for a particular user's properties
 propertiesRouter.get("/", (req, res) => {
@@ -65,7 +77,7 @@ propertiesRouter.get("/:idx", (req, res) => {
     });
 });
 //New POST
-propertiesRouter.post("/", (req, res) => {
+propertiesRouter.post("/", upload.single("img"), (req, res) => {
   // calculations is imported from the public/calculations file
   calculations.feeParser(req);
   calculations.MapsAPICall(req).then(() => {

@@ -24,7 +24,7 @@ p {
 }
 
 p, a, form{
-  color: #D7BA89
+  color: #56342A
 }
 
 li a {
@@ -42,7 +42,7 @@ li a {
 }
 
 html,body{
-background-color:#56342A;
+/* background-color:#56342A; */
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -65,7 +65,7 @@ height: 370px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+background-color: #D7BA89 !important;
 }
 
 .card-header h2{
@@ -114,4 +114,8 @@ color: white;
 
 .links a{
 margin-left: 4px;
+}
+
+.border{
+  border-color: #56342A !important;
 }
