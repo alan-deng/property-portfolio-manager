@@ -1,31 +1,38 @@
-# Project #1 : Property Portfolio Manager(by Team AIDs)
+## Property Portfolio Manager
 
-# Index : 
-- [Description](#Description)
-- [Functional Description]([#Functional])
-- [Technologies](#Technologies)
-- [Authors](#Authors)
+### An app that allows property owners to organize and manage their properties & tenants' information
 
-## Description
-- This is an app that allows property owners to organize and manage their properties & tenants' information
+------------------------------
+### `Website`
 
-## Functional Description
-1. Sign up & Sign in
-    As a user, I input my information to the page to sign up or log in to the app.
-2. Update
- As a user, I click a button on the properpage to update my own properties' and tenants' information.
-3. Delete
- As a user, I clikc a button to delete my property or tenant.
-4. Add
- As a user, I click a button to go to a page to add a property or tenant to a specific property.
-5. Map API
- As a user, I want to see my properties on a map, so I click a button to bring me to that page.
+https://property-manager-project.herokuapp.com/
 
-## Technologies
-- HTML, JS, Node.js, Express, Bootstrap, MongoDB, Mongoose, bCrypt
+### `Features`
 
-## Authors
+- Full CRUD functionality on property and tenant information (read, add, edit, and delete)
+- Using Google Maps and Places APIs, a user can see a map that displays a user’s property locations, along with associated information on each property
+- Authentication workflow via Passport, with password hashing via bCrypt
 
-- github.com/alan-deng (Alan Deng)
-- github.com/isabellukk (Isabel Luk)
-- github.com/style6513 (DaeYoung Hwang)
+-------------------------------
+### `Technologies` <a name="Technologies"></a>
+
+Bootstrap, MongoDB, Node.js, Express, HTML, JS, Passsport, bCrypt
+
+-------------------------------
+### `Images` <a name="Images"></a>
+
+
+
+-------------------------------
+### `Planned Features` <a name="Planned-Features"></a>
+
+- AWS funtionality for image uploads
+
+-------------------------------
+### `Authors` <a name="Authors"></a>
+
+- [Alan Deng](https://www.github.com/alan-deng) 
+- [Isabel Luk](https://www.github.com/isabellukk) 
+- [DaeYoung Hwang](https://www.github.com/style6513) 
+
+
