@@ -2,6 +2,10 @@
 require("../config/aws");
 const express = require("express"); //is this needed? already in server.js
 const multer = require("multer");
+const fs = require("fs");
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
+
 const upload = multer({ dest: "uploads/" });
 
 const Property = require("../models/properties");
@@ -12,18 +16,13 @@ const propertiesRouter = require("express").Router({
 const tenantsRouter = require("./tenants");
 const calculations = require("../public/calculations");
 const auth = require("./auth");
+const { uploadFile, deleteFile } = require("../s3");
 // URL is /users/:userId/properties
 // all routes are for a specific user
 // user id can be accessed by req.params.userId in all below routes
 
 //auth middleware
 propertiesRouter.use(auth.isAuth);
-
-//photo upload test
-propertiesRouter.post("/image", upload.single("test_upload"), (req, res) => {
-  console.log(req.file);
-  res.send("uploaded");
-});
 
 //Index for a particular user's properties
 propertiesRouter.get("/", (req, res) => {
@@ -33,7 +32,6 @@ propertiesRouter.get("/", (req, res) => {
       if (err) {
         res.redirect("/error");
       } else {
-        // console.log(user);
         res.render("./properties/index.ejs", {
           userProperties: user.ownedProperties,
           userId: req.params.userId,
@@ -48,7 +46,7 @@ propertiesRouter.get("/new", (req, res) => {
     userId: req.params.userId,
   });
 });
-//users/:userId/proerties/map
+
 // Map page
 propertiesRouter.get("/map", (req, res) => {
   User.findById(req.params.userId)
@@ -76,8 +74,14 @@ propertiesRouter.get("/:idx", (req, res) => {
       }
     });
 });
+
 //New POST
-propertiesRouter.post("/", upload.single("img"), (req, res) => {
+propertiesRouter.post("/", upload.single("img_upload"), async (req, res) => {
+  // Upload to AWS S3 and record relavant data
+  const result = await uploadFile(req.file);
+  await unlinkFile(req.file.path);
+  req.body.img = result.Location;
+  req.body.imgS3Key = result.Key;
   // calculations is imported from the public/calculations file
   calculations.feeParser(req);
   calculations.MapsAPICall(req).then(() => {
@@ -116,23 +120,41 @@ propertiesRouter.get("/:idx/edit", (req, res) => {
 });
 
 //Update
-propertiesRouter.put("/:idx", (req, res) => {
+propertiesRouter.put("/:idx", upload.single("img_upload"), async (req, res) => {
   calculations.feeParser(req);
-  Property.findByIdAndUpdate(req.params.idx, req.body, { new: true }, (err) => {
-    if (err) {
-      res.redirect("/error");
-    } else {
-      res.redirect(`/users/${req.params.userId}/properties/${req.params.idx}`);
+  if (req.file) {
+    const result = await uploadFile(req.file);
+    await unlinkFile(req.file.path);
+    req.body.img = result.Location;
+    req.body.imgS3Key = result.Key;
+  }
+  Property.findByIdAndUpdate(
+    req.params.idx,
+    req.body,
+    // returns old property so we can get the s3 key to delete
+    async (err, oldProp) => {
+      if (err) {
+        console.log(err);
+        res.redirect("/error");
+      } else {
+        if (req.file) {
+          await deleteFile(oldProp.imgS3Key);
+        }
+        res.redirect(
+          `/users/${req.params.userId}/properties/${req.params.idx}`
+        );
+      }
     }
-  });
+  );
 });
 
 //Delete Route
 propertiesRouter.delete("/:idx", (req, res) => {
-  Property.findByIdAndDelete(req.params.idx, (err) => {
+  Property.findByIdAndDelete(req.params.idx, async (err, deletedProp) => {
     if (err) {
       res.redirect("/error");
     } else {
+      await deleteFile(deletedProp.imgS3Key);
       User.findByIdAndUpdate(
         req.params.userId,
         {

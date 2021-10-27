@@ -6,7 +6,7 @@ const User = require("../models/users");
 exports.feeParser = (req) => {
   let fees = [];
   for (const key in req.body) {
-    if (key.includes("fees_name")) {
+    if (key.includes("fees_name") && req.body[key.replace("name", "value")]) {
       const name = req.body[key];
       const number = req.body[key.replace("name", "value")];
       fees.push({ name: name, amount: parseInt(number) });

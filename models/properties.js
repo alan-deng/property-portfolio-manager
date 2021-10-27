@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const propertySchema = new mongoose.Schema({
   img: String,
+  imgS3Key: String,
   name: { type: String, required: true },
   buyPrice: Number,
   address: {
