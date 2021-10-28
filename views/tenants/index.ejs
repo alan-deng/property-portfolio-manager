@@ -84,6 +84,9 @@
     
     <h1><%=property.name%> Tenant Information</h1>
     <div class="card mx-auto d-block border border-2 p-2" style="width:40rem; height:auto">
+      <% if (tenants.length === 0){%>
+        <p>No Current Tenants</p>
+      <%}%>
       <% for (let i = 0; i < tenants.length; i++) { %>
         <a class="d-inline mx-2" href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenants[i]._id%>">
         <%=tenants[i].name%>
