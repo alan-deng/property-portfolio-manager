@@ -13,48 +13,75 @@
     <link rel='stylesheet' href='/style.css'>
   </head>
   <body>
-    <h1><%=property.name%> Tenant Information</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
-      <div class="collapse navbar-collapse">
-      <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/properties/">Home Page</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/properties/new">Add New Property</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/edit">Edit User Information</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a href="/logout">Logout</a>
-        </li>
-      </ul>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/users/<%=userId%>/properties/"
+          >Logo Here</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
+            <li class="nav-item text-dark">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/users/<%=userId%>/properties/"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item text-dark">
+              <a class="nav-link" href="/users/<%=userId%>/properties/map"
+                >Map of Properties</a
+              >
+            </li>
+            <li class="nav-item text-dark">
+              <a class="nav-link" href="/users/<%=userId%>/properties/new"
+                >Add New Property</a
+              >
+            </li>
+            <li class="nav-item text-dark">
+              <a class="nav-link" href="/users/<%=userId%>/edit"
+                >Edit User Information</a
+              >
+            </li>
+          </ul>
+          <button class="btn btn-outline-danger ms-auto">
+            <a href="/logout">Logout</a>
+          </button>
+        </div>
       </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="collapse navbar-collapse">
-      <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/properties/<%=property._id%>">Property Details</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/properties/<%=property._id%>/tenants/new">Add Tenant</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a href="/users/<%=userId%>/properties/<%=property._id%>/tenants/">Tenant Details</a>
-        </li>
-      </ul>
+        <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
+          <li class="nav-item mx-4">
+            <a class="nav-link" href="/users/<%=userId%>/properties/<%=property._id%>">Property Details</a>
+          </li>
+          <li class="nav-item mx-4">
+            <a class="nav-link" href="/users/<%=userId%>/properties/<%=property._id%>/tenants/new">Add Tenant</a>
+          </li>
+          <li class="nav-item mx-4">
+            <a class="nav-link" href="/users/<%=userId%>/properties/<%=property._id%>/tenants/">Tenant Details</a>
+          </li>
+        </ul>
       </div>
     </nav>
-
-    <div class="card mx-auto d-block" style="width:40rem; height:auto">
+    
+    <h1><%=property.name%> Tenant Information</h1>
+    <div class="card mx-auto d-block border border-2 p-2" style="width:40rem; height:auto">
       <% for (let i = 0; i < tenants.length; i++) { %>
         <a class="d-inline mx-2" href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenants[i]._id%>">
-          <%=tenants[i].name%>
+        <%=tenants[i].name%>
         </a>
         <form class="d-inline" action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenants[i]._id%>/edit" method="GET">
           <input type='submit' value="Edit Tenant"/>

@@ -20,7 +20,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Logo Here</a>
+      <a class="navbar-brand" href="/users/<%=userId%>/properties/">Logo Here</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -71,11 +71,12 @@
   </nav>
   <h1>Your Properties</h1>
 
-<div class="container">
-  <div class="row row-cols-3 mt-5 justify-content-center  border-start border-end">
+  <!-- removing container so the cards span the whole page; every other page will retain the container and have a conditional navbar on the side? -->
+<div class="container-fluid h-auto">
+  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 gap-4 justify-content-center border-start border-end">
     <% userProperties.forEach(property => { %>
-      <div class="card card-custom mx-4 mb-4 p-2 col border border-3 rounded">
-        <img class='card-image' src="<%= property.img %>"   height="50%" object-fit="contain" >
+      <div class="card p-2 col border border-2 rounded">
+        <img class='card-image' src="<%= property.img %>"   height="50%">
         <a class='mx-2'href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
         <p><%= property.address%></p>
         <p><b>Tenants</b></p>
@@ -92,9 +93,7 @@
       <% }) %>
   </div>
 
-
 </div>
-
 
 
 

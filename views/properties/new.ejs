@@ -21,29 +21,34 @@
   </head>
 
   <body>
-    <h1>Add New Property</h1>
-    <nav class="navbar navbar-expand-lg bg-secondary">
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/">Home Page</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/users/<%=userId%>/properties/">Logo Here</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
+          <li class="nav-item  text-dark">
+            <a class="nav-link active" aria-current="page" href="/users/<%=userId%>/properties/">Home</a>
           </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
+          <li class="nav-item  text-dark">
+            <a class="nav-link" href="/users/<%=userId%>/properties/map">Map of Properties</a>
           </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/new">Add New Property</a>
+          <li class="nav-item  text-dark">
+            <a class="nav-link" href="/users/<%=userId%>/properties/new">Add New Property</a>
           </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/edit">Edit User Information</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/logout">Logout</a>
+          <li class="nav-item  text-dark">
+            <a class="nav-link" href="/users/<%=userId%>/edit">Edit User Information</a>
           </li>
         </ul>
+        <button class="btn btn-outline-danger ms-auto"><a  href="/logout">Logout</a></button>
       </div>
-    </nav>
-    <div class="card mx-auto" style="width: 40rem">
+    </div>
+  </nav>
+    <h1>Add New Property</h1>
+    
+    <div class="card mx-auto border border-2 p-2 h-auto" style="width: 50vw">
       <form
         action="/users/<%=userId%>/properties/"
         method="POST"
@@ -66,10 +71,14 @@
         <input class="mb-2" id="address" type="text" name="address" required />
         <br />
         <label for="img_upload">Add Image (accepts png/jpg files)</label
-        ><input type="file" name="img_upload" id="img_upload" accept="image/png, image/jpeg" />
+        ><br/>
+        <input type="file" name="img_upload" id="img_upload" accept="image/png, image/jpeg" />
         <br />
-        <p id="new_misc_fee">Add Misc Fee</p>
-        <div id="misc_fees"></div>
+        <div id="misc_fees">
+        <p class='mx-0'>Misc Fees</p>
+      </div>
+        <input type='button' id='new_misc_fee' value='Add Misc Fee' class='my-2'></input>
+        <br/>
         <input
           type="submit"
           name=""
@@ -82,7 +91,7 @@
       let i = 0;
       $("#new_misc_fee").on("click", () => {
         $("#misc_fees")
-          .append(`<label for='fees_name_${i}'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
+          .append(`<label for='fees_name_${i}' class='my-2'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
     <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `);
         i++;
       });

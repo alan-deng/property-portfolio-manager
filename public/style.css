@@ -12,24 +12,16 @@
 h1 {
   text-align: center;
 }
-.card-custom {
-  max-width: 20vw;
-}
-.card-img{
-  width: 50%;
-  object-fit: contain;
-}
+
+
 p {
   margin-bottom: 5px;
 }
 
-p, a, form{
-  color: #56342A
+a {
+  color: black
 }
 
-li a {
-  color: #56342A
-}
 .card p {
   margin: 5px
 }
@@ -62,12 +54,12 @@ align-content: center;
 
 .card{
 height: 370px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
 background-color: #D7BA89 !important;
 }
 
+.card-image{
+  object-fit: cover ;
+}
 .card-header h2{
 color: white;
 }
@@ -118,4 +110,20 @@ margin-left: 4px;
 
 .border{
   border-color: #56342A !important;
+}
+
+.hover-underline:hover, .nav-link:hover {
+  border-bottom: 1px solid
+}
+
+.link-button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  /* font-family: arial, sans-serif; */
+  /*input has OS specific font-family*/
+  /* color: #069; */
+  /* text-decoration: underline; */
+  /* cursor: pointer; */
 }

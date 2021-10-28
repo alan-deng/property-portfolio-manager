@@ -30,7 +30,7 @@ window.initMap = () => {
       '<div id="content">' +
       '<div id="siteNotice">' +
       "</div>" +
-      `<img style='max-width: 80%'src='${property.img || ""}'>` +
+      `<img class='mx-4' style='max-width: 90%'src='${property.img || ""}'>` +
       `<h1 style='color:black !important' id="firstHeading" class="firstHeading">${property.name}</h1>` +
       '<div id="bodyContent">' +
       `<p style='color:black !important'><b>Address: </b>${property.address}<p><br>` +
@@ -52,9 +52,10 @@ window.initMap = () => {
       });
     });
     map.addListener("click", () => {
-      infoWindow.close();})
+      infoWindow.close();
+    });
   };
-  
+
   for (const property of userProperties) {
     markerAdder(property);
   }

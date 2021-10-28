@@ -13,51 +13,79 @@
         <link rel='stylesheet' href='/style.css'>
     </head>
     <body>
-      <h1>Edit Tenant</h1>
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
-        <div class="collapse navbar-collapse">
-        <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/">Home Page</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/map">Map of Properties</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/new">Add New Property</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/edit">Edit User Information</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/logout">Logout</a>
-          </li>
-        </ul>
-        </div>
-      </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <div class="collapse navbar-collapse">
-        <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/<%=propertyId%>">Property Details</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/new">Add Tenant</a>
-          </li>
-          <li class="nav-item mx-4">
-            <a href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/">Tenant Details</a>
-          </li>
-        </ul>
-        </div>
-      </nav>
-      <div class="card mx-auto" style="width:50rem;">
-      <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenant._id%>?_method=PUT" method="POST">
-        Name: <input type="text" name="name" value="<%=tenant.name%>" required></br>
-        Rent: <input type="number" name="rent" value="<%=tenant.rent%>"></br>
-        Contact number: <input type="tel" name="contactNum" value="<%=tenant.contactNum%>"></br>
-        Contact email: <input type="email" name="contactEmail" value="<%=tenant.contactEmail%>"></br>
-        <input type="submit" value="Edit Tenant">
-      </form>
-    </div>
-    </body>
-</html>
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/users/<%=userId%>/properties/"
+            >Logo Here</a
+            >
+            <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
+              <li class="nav-item text-dark">
+                <a
+                class="nav-link active"
+                aria-current="page"
+                href="/users/<%=userId%>/properties/"
+                >Home</a
+                >
+              </li>
+              <li class="nav-item text-dark">
+                <a class="nav-link" href="/users/<%=userId%>/properties/map"
+                  >Map of Properties</a
+                  >
+                </li>
+                <li class="nav-item text-dark">
+                  <a class="nav-link" href="/users/<%=userId%>/properties/new"
+                    >Add New Property</a
+                    >
+                  </li>
+                  <li class="nav-item text-dark">
+                    <a class="nav-link" href="/users/<%=userId%>/edit"
+                      >Edit User Information</a
+                      >
+                    </li>
+                  </ul>
+                  <button class="btn btn-outline-danger ms-auto">
+                    <a href="/logout">Logout</a>
+                  </button>
+                </div>
+              </div>
+            </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+              <div class="collapse navbar-collapse">
+                <ul class='navbar-nav mx-auto mb-2 mb-lg-0'>
+                  <li class="nav-item mx-4">
+                    <a class="nav-link" href="/users/<%=userId%>/properties/<%=propertyId%>">Property Details</a>
+                  </li>
+                  <li class="nav-item mx-4">
+                    <a class="nav-link" href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/new">Add Tenant</a>
+                  </li>
+                  <li class="nav-item mx-4">
+                    <a class="nav-link" href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/">Tenant Details</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <h1>Edit Tenant</h1>
+            <div class="card mx-auto border border-2 p-2 h-auto" style="width:50vw;">
+              <form action="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=tenant._id%>?_method=PUT" method="POST">
+                Name: <input class='my-1' type="text" name="name" value="<%=tenant.name%>" required></br>
+                Rent: <input class='my-1' type="number" name="rent" value="<%=tenant.rent%>"></br>
+                Contact number: <input class='my-1' type="tel" name="contactNum" value="<%=tenant.contactNum%>"></br>
+                Contact email: <input class='my-1' type="email" name="contactEmail" value="<%=tenant.contactEmail%>"></br>
+                <input type="submit" value="Edit Tenant">
+              </form>
+            </div>
+          </body>
+          </html>
+          
