@@ -16,7 +16,7 @@ https://property-manager-project.herokuapp.com/
 -------------------------------
 ### `Technologies` <a name="Technologies"></a>
 
-Bootstrap, MongoDB, Node.js, Express, HTML, JS, Passsport, bCrypt
+Bootstrap, MongoDB, Node.js, Express, HTML, JS, CSS, Passsport, bCrypt
 
 -------------------------------
 ### `Images` <a name="Images"></a>
