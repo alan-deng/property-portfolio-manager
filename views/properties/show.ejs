@@ -129,32 +129,16 @@
         <p><b>Misc Fees</b></p>
         <% if(property.fees.length === 0 ){%>
         <p>No misc fees</p>
-        <%} %> <% for (fee of property.fees){%>
+        <%} for (fee of property.fees){%>
         <p><%= fee.name %>: <%= fee.amount %></p>
         <%}%>
         <p><b>Tenants</b></p>
         <% if(property.tenants.length === 0 ){%>
         <p>No tenants</p>
         <%} %> <%for (let i = 0; i < property.tenants.length; i++){%>
-        <p><%=property.tenants[i].name%></p>
+        <a class='mx-2' href="/users/<%=userId%>/properties/<%=propertyId%>/tenants/<%=property.tenants[i]._id%>"><%=property.tenants[i].name%></a>
         <%}%>
       </div>
     </div>
   </body>
 </html>
-<!-- 
-<div class="card p-2 col border border-2 rounded">
-  <img class='card-image' src="<%= property.img %>"   height="50%">
-  <a class='mx-2'href="/users/<%=userId%>/Properties/<%=property._id%>"><%= property.name%></a>
-  <p><%= property.address%></p>
-  <p><b>Tenants</b></p>
-  <%if(!property.tenants.length){%>
-    <p>No Tenants</p>
-  <%}%>
-  <%for (let i = 0; i < Math.min(2, property.tenants.length); i++){%>
-    <p><%=property.tenants[i].name%></p>
-    <%if(i === 1 && i < property.tenants.length - 1){%>
-      <p>More tenants in details page</p>
-    <%}%>
-  <%}%>
-</div> -->

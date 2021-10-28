@@ -67,9 +67,11 @@ propertiesRouter.get("/:idx", (req, res) => {
       if (err) {
         res.redirect("/error");
       } else {
+        console.log(property);
         res.render("./properties/show.ejs", {
           property: property,
           userId: req.params.userId,
+          propertyId: req.params.idx,
         });
       }
     });
