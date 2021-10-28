@@ -60,9 +60,9 @@ background-color: #D7BA89 !important;
 .card-image{
   object-fit: cover ;
 }
-.card-header h2{
+/* .card-header h2{
 color: white;
-}
+} */
 
 .input-group-prepend span{
 width: 50px;
