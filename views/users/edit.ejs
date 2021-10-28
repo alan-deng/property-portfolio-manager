@@ -73,8 +73,13 @@
   <b>New Password</b>: <input class='mb-2' id="password" type="text" name="password"  /><br />
 
   <b>Confirm Password</b>: <input class='mb-2' id="password" type="text" name="password1"  /><br />
- <p class='mx-0'>Functional, but for demo purposes, is disabled</p>
-    <input type="submit" name="" value="Edit Login Information" disabled />
+ <% if (user.login === 'alandeng1'){ %>
+  <p class='mx-0'>Functional, but for demo purposes, is disabled</p>
+ <% } %>
+    <input type="submit" name="" value="Edit Login Information" 
+    <% if (user.login === 'alandeng1'){%>
+      disabled
+    <%} %> />
   </div>
 </body>
 
