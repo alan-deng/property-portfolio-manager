@@ -154,7 +154,9 @@ propertiesRouter.delete("/:idx", (req, res) => {
     if (err) {
       res.redirect("/error");
     } else {
-      await deleteFile(deletedProp.imgS3Key);
+      if (deletedProp.imgS3Key) {
+        await deleteFile(deletedProp.imgS3Key);
+      }
       User.findByIdAndUpdate(
         req.params.userId,
         {

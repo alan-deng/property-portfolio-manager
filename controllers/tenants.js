@@ -72,7 +72,7 @@ tenantsRouter.post("/", (req, res) => {
         }
       );
       res.redirect(
-        `/users/${req.params.userId}/properties/${req.params.propertyId}`
+        `/users/${req.params.userId}/properties/${req.params.propertyId}/tenants`
       );
     });
   } catch (err) {
@@ -102,7 +102,7 @@ tenantsRouter.put("/:id", (req, res) => {
       res.redirect("/error");
     } else {
       res.redirect(
-        `/users/${req.params.userId}/properties/${req.params.propertyId}`
+        `/users/${req.params.userId}/properties/${req.params.propertyId}/tenants`
       );
     }
   });
