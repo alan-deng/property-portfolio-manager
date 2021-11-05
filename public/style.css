@@ -6,7 +6,7 @@
   font-family: 'Titillium Web', sans-serif;
 
 }
-#loginPage{
+#loginPage {
   background-image: url("https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-position: center;
   background-repeat: no-repeat;
@@ -34,13 +34,22 @@ background-color: transparent !important
   margin-right: 10px;
 }
 #loginPage .card h2{
-  padding-top: 2%;
+  padding-top: 3%;
+  text-align: center;
   letter-spacing: 2px;
   border-radius: 25px !important;
 }
 #loginPage .input-group {
   padding: 3%;
 }
+.registerContainer{
+  padding-bottom: 3%;
+  padding-left: 4%;
+  padding-right: 4%;
+
+
+}
+
 a{
   color: darkblue;
 }
@@ -170,7 +179,7 @@ margin-left: 4px;
 
 
 #loginPage .container {
-    margin-top: 30%;
+    margin-top: 20%;
 }
 
 
@@ -180,7 +189,7 @@ margin-left: 4px;
 
 
 #loginPage .container {
-  margin-top: 30%;
+  margin-top: 20%;
 }
 
 
