@@ -18,7 +18,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/users/<%=userId%>/properties/">Logo Here</a>
+      <a class="navbar-brand" href="/users/<%=userId%>/properties/"><img src="https://i.ibb.co/ZYd6RkY/Screen-Shot-2021-11-05-at-5-52-38-AM-removebg-preview.png" width="130px" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,15 +36,15 @@
           <li class="nav-item  text-dark">
             <a class="nav-link" href="/users/<%=userId%>/edit">Edit User Information</a>
           </li>
-    
-         
+
+
 
         </ul>
         <button class="btn btn-outline-danger ms-auto"><a  href="/logout">Logout</a></button>
       </div>
     </div>
   </nav>
-    
+
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@
     <br />
 
 
-    
+
     <!-- <label for="img">Image URL</label>
     <input type="text" name="img" id="img" value="<%=property.img%>" /> -->
     <label for="img_upload">Change Image (accepts png/jpg files)</label
@@ -85,8 +85,8 @@
     <div id='misc_fees'>
     <p class='mx-0'>Misc Fees</p>
     <% for (let i = 0; i < property.fees.length; i++){%>
-      <label for='fees_name_<%=i%>'>Fee Name: </label><input type="text" name='fees_name_<%=i%>' id='fees_name_<%=i%>' value='<%=property.fees[i].name%>' /> 
-      <label for='fees_value_<%=i%>'>Fee Amount: </label><input type="number" name='fees_value_<%=i%>' id='fees_value_<%=i%>' value='<%=property.fees[i].amount%>' /> 
+      <label for='fees_name_<%=i%>'>Fee Name: </label><input type="text" name='fees_name_<%=i%>' id='fees_name_<%=i%>' value='<%=property.fees[i].name%>' />
+      <label for='fees_value_<%=i%>'>Fee Amount: </label><input type="number" name='fees_value_<%=i%>' id='fees_value_<%=i%>' value='<%=property.fees[i].amount%>' />
     <%}%>
     </div>
     <input type='button' id='new_misc_fee' value='Add Misc Fee' class='my-2'></input>
@@ -102,11 +102,11 @@
       console.log(err)
     }
     $('#new_misc_fee').on('click', () => {
-      $('#misc_fees').append(`<label for='fees_name_${i}' class='my-2'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
+      $('#misc_fees').append(`<label for='fees_name_${i}' class='my-2'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' />
       <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `)
       i++
     })
-  
+
   </script>
 </body>
 

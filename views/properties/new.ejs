@@ -23,7 +23,7 @@
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/users/<%=userId%>/properties/">Logo Here</a>
+      <a class="navbar-brand" href="/users/<%=userId%>/properties/"><img src="https://i.ibb.co/ZYd6RkY/Screen-Shot-2021-11-05-at-5-52-38-AM-removebg-preview.png" width="130px" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -47,7 +47,7 @@
     </div>
   </nav>
     <h1>Add New Property</h1>
-    
+
     <div class="card mx-auto border border-2 p-2 h-auto" style="width: 50vw">
       <form
         action="/users/<%=userId%>/properties/"
@@ -91,7 +91,7 @@
       let i = 0;
       $("#new_misc_fee").on("click", () => {
         $("#misc_fees")
-          .append(`<label for='fees_name_${i}' class='my-2'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' /> 
+          .append(`<label for='fees_name_${i}' class='my-2'>Fee Name: </label><input type="text" name='fees_name_${i}' id='fees_name_${i}' />
     <label for='fees_value_${i}'>Fee Amount: </label><input type="number" name='fees_value_${i}' id='fees_value_${i}' /> `);
         i++;
       });
