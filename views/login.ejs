@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
   <script src="https://kit.fontawesome.com/c2796a7354.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" rel="stylesheet">
 
@@ -20,15 +22,16 @@
 </head>
 
 <body>
+  <section id="loginPage">
   <div class="container">
     <div class="d-flex justify-content-center h-100">
       <div class="card my-auto">
         <div class="card-header">
 
-          <h2>Login</h2>
+          <h2><b>Login</b></h2>
         </div>
         <div class="card-body">
-          
+
           <% for (error of errors){%>
             <p><%= error %></p>
           <%}%>
@@ -58,24 +61,26 @@
 
 
           </form>
-          <p>For demo data, use</p>
+          <p><strong>For demo, please use the following credentials</strong></p>
+
           <p>username: alandeng1</p>
           <p>password: 123321</p>
 
-        </div>
-        <div class="card-footer">
-          <div class="d-flex justify-content-center ">
-            Dont have an account yet? <a class='mx-1' href='/register'>Sign up here!</a>
+          <div class="card-footer">
+            <div class="d-flex justify-content-center ">
+              Dont have an account yet? <a class='mx-1' href='/register'>Sign up here!</a>
+
+            </div>
 
           </div>
-
         </div>
+
 
       </div>
 
     </div>
   </div>
-
+</section>
 </body>
 
 </html>
