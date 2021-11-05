@@ -1,6 +1,49 @@
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 @import url('https://fonts.google.com/specimen/Roboto#standard-styles');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
 
+*{
+  font-family: 'Titillium Web', sans-serif;
+
+}
+#loginPage{
+  background-image: url("https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 10%;
+  justify-content: center;
+  min-height: 100vh !important;
+  min-width: 100vw;
+}
+#loginPage .card{
+  display: flex;
+  margin-top: 20%;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: #f6e7d9 !important;
+  box-shadow: 5px 10px 10px 5px rgba(255,255,255,0.2);
+}
+#loginPage .card-footer{
+  border-radius: 25px;
+}
+#loginPage .card-header{
+background-color: transparent !important
+}
+.input-group-prepend span{
+  margin-right: 10px;
+}
+#loginPage .card h2{
+  padding-top: 2%;
+  letter-spacing: 2px;
+  border-radius: 25px !important;
+}
+#loginPage .input-group {
+  padding: 3%;
+}
+a{
+  color: darkblue;
+}
 
 #map {
     height: 800px;
@@ -18,9 +61,7 @@ p {
   margin-bottom: 5px;
 }
 
-a {
-  color: black
-}
+
 
 .card p {
   margin: 5px
@@ -34,11 +75,9 @@ a {
 }
 
 html,body{
-/* background-color:#56342A; */
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
+
 font-family: sans-serif;
+max-height: 100vh !important;
 }
 
 .container{
@@ -53,7 +92,7 @@ align-content: center;
 }
 
 .card{
-height: 370px;
+/* height: 370px; */
 background-color: #D7BA89 !important;
 }
 
@@ -126,4 +165,23 @@ margin-left: 4px;
   /* color: #069; */
   /* text-decoration: underline; */
   /* cursor: pointer; */
+}
+@media only screen and (max-width: 450px) {
+
+
+#loginPage .container {
+    margin-top: 30%;
+}
+
+
+}
+
+@media only screen and (max-width: 768px) {
+
+
+#loginPage .container {
+  margin-top: 30%;
+}
+
+
 }
